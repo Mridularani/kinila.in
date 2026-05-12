@@ -1,1 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinila AI Health — Clinical Decision Support for Community Health Workers</title>
+<meta name="description" content="AI-powered clinical decision support for ASHA workers, ANMs, and community health volunteers. Validated at Yenepoya Medical College, Karnataka.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #0D9488;
+    --teal-dark: #0a7870;
+    --teal-deeper: #075f5a;
+    --teal-pale: #e6f7f6;
+    --teal-mid: #99f6e4;
+    --ink: #0f1f1e;
+    --ink-mid: #2b3f3e;
+    --muted: #587070;
+    --border: #cce5e4;
+    --white: #ffffff;
+    --off-white: #f7fafa;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6vw; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-wordmark { font-weight: 600; font-size: 1rem; color: var(--ink); letter-spacing: -0.01em; }
+  .nav-wordmark span { color: var(--teal); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-link { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-link:hover { color: var(--teal); }
+  .btn-nav {
+    background: var(--teal); color: white; border: none;
+    padding: 0.5rem 1.2rem; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: background 0.2s;
+  }
+  .btn-nav:hover { background: var(--teal-dark); }
+
+  .hero {
+    min-height: 100vh; background: var(--teal);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 8rem 6vw 5rem; position: relative; overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    color: var(--teal-mid); font-size: 0.8rem; font-weight: 500;
+    padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem;
+    letter-spacing: 0.03em; animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: ''; width: 7px; height: 7px; background: var(--teal-mid); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4rem); color: white;
+    line-height: 1.1; max-width: 680px; margin-bottom: 1.25rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal-mid); }
+  .hero .lead {
+    font-size: clamp(1rem, 1.6vw, 1.15rem); color: rgba(255,255,255,0.82);
+    max-width: 540px; margin-bottom: 2.2rem; font-weight: 300; line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-cta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+  .btn-primary {
+    background: white; color: var(--teal-dark); border: none;
+    padding: 0.85rem 2rem; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: white; border-color: white; }
+
+  .stat-strip {
+    background: var(--teal-deeper); padding: 1.5rem 6vw;
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--teal-mid); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-weight: 400; margin-top: 4px; }
+
+  section { padding: 5rem 6vw; }
+  .section-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+  h2.section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--ink); line-height: 1.15; margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+
+  .features { background: var(--off-white); }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .feature-card {
+    background: white; border: 1px solid var(--border); border-radius: 14px; padding: 2rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-card:hover { box-shadow: 0 8px 32px rgba(13,148,136,0.1); transform: translateY(-3px); }
+  .feature-icon {
+    width: 44px; height: 44px; background: var(--teal-pale); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+  }
+  .feature-icon svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+  .feature-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+  .audience { background: white; }
+  .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+  .audience-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .role-tag {
+    display: inline-block; background: var(--teal-pale); color: var(--teal-dark);
+    font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px;
+    margin-bottom: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .audience-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+  .audience-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  .validation { background: var(--off-white); }
+  .val-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .metric-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; }
+  .metric-card.highlight { background: var(--teal); border-color: var(--teal); }
+  .metric-card.highlight .metric-num { color: white; }
+  .metric-card.highlight .metric-label { color: rgba(255,255,255,0.85); }
+  .metric-card.highlight .metric-note { color: rgba(255,255,255,0.65); }
+  .metric-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--teal); line-height: 1; margin-bottom: 0.3rem; }
+  .metric-label { font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+  .metric-note { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+  .safety-block { grid-column: 1/-1; background: var(--teal-deeper); border-radius: 12px; padding: 1.5rem; }
+  .safety-block h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-mid); margin-bottom: 1rem; }
+  .safety-bar-wrap { display: flex; border-radius: 8px; overflow: hidden; height: 34px; margin-bottom: 0.75rem; }
+  .seg { display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 600; }
+  .seg-safe { background: #0c7a70; flex: 73; color: white; }
+  .seg-border { background: #0e9080; flex: 16; color: rgba(255,255,255,0.85); }
+  .seg-unsafe { background: rgba(255,255,255,0.15); flex: 1; color: rgba(255,255,255,0.5); font-size: 0.65rem; }
+  .safety-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .safety-legend span { font-size: 0.75rem; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; }
+
+  .val-context { display: flex; flex-direction: column; gap: 1rem; }
+  .ctx-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; }
+  .ctx-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 6px; }
+  .ctx-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+  .check { color: var(--teal); }
+
+  .institution { background: white; }
+  .inst-card {
+    background: var(--teal-pale); border: 1px solid var(--border); border-radius: 16px;
+    padding: 2.5rem; display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
+  }
+  .inst-logo {
+    width: 60px; height: 60px; background: var(--teal); border-radius: 14px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .inst-info h3 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+  .inst-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+  .pi-tag { display: inline-block; margin-top: 0.8rem; font-size: 0.8rem; color: var(--teal-dark); }
+  .pi-tag strong { font-weight: 600; }
+
+  .team { background: var(--off-white); }
+  .team-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .team-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; flex: 1; min-width: 220px; }
+  .team-card h4 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+  .team-role { font-size: 0.82rem; color: var(--teal); font-weight: 500; margin-bottom: 0.5rem; }
+  .team-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .kinila-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 0.8rem;
+    font-size: 0.83rem; color: var(--teal); text-decoration: none; font-weight: 500;
+    border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s;
+  }
+  .kinila-link:hover { border-color: var(--teal); }
+
+  .cta-section {
+    background: var(--teal); padding: 5rem 6vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: white; line-height: 1.2; margin-bottom: 0.8rem; }
+  .cta-section > div > p { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.7; }
+  .cta-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .cta-card {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px; padding: 1.2rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; transition: background 0.2s; gap: 1rem;
+  }
+  .cta-card:hover { background: rgba(255,255,255,0.18); }
+  .cta-card h4 { font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 0.15rem; }
+  .cta-card p { font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+  .cta-arrow { color: var(--teal-mid); font-size: 1.2rem; flex-shrink: 0; }
+
+  footer {
+    background: var(--ink); padding: 2rem 6vw;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal-mid); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    .val-grid, .cta-section { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    nav { padding: 0 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .cta-section { padding: 3.5rem 1.5rem; }
+    footer { padding: 1.5rem; }
+    .stat-strip { padding: 1.5rem; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#0D9488"/>
+      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+      <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
+      <circle cx="358" cy="170" r="16" fill="white"/>
+    </svg>
+    <span class="nav-wordmark">Kinila <span>AI Health</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#what-it-does" class="nav-link">What it does</a>
+    <a href="#validation" class="nav-link">Validation</a>
+    <a href="#team" class="nav-link">Team</a>
+    <a href="https://care.kinila.in" class="btn-nav">Launch tool →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="hero-bg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="950" cy="100" r="280" fill="#0B8578"/>
+    <circle cx="1080" cy="560" r="200" fill="#0B8578"/>
+    <circle cx="80" cy="620" r="170" fill="#0B8578"/>
+    <polyline points="820,320 870,320 895,275 930,380 965,300 1000,340 1040,340" fill="none" stroke="#0C9E91" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="1040" cy="340" r="7" fill="#99F6E4"/>
+  </svg>
+  <div class="hero-badge">Validated · March 2026 · Yenepoya Medical College, Mangalore</div>
+  <h1>AI-assisted triage for <em>frontline</em> health workers</h1>
+  <p class="lead">Kinila AI Health helps ASHA workers, ANMs, and community health volunteers assess patient symptoms accurately and flag emergencies — even in low-resource settings across Karnataka.</p>
+  <div class="hero-cta">
+    <a href="https://care.kinila.in" class="btn-primary">
+      Start an assessment
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#validation" class="btn-ghost">See validation results ↓</a>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-item"><span class="stat-num">97.1%</span><span class="stat-label">Emergency detection sensitivity</span></div>
+  <div class="stat-item"><span class="stat-num">99%</span><span class="stat-label">Safe output rate</span></div>
+  <div class="stat-item"><span class="stat-num">81%</span><span class="stat-label">Overall triage accuracy</span></div>
+  <div class="stat-item"><span class="stat-num">0.81</span><span class="stat-label">Weighted Kappa agreement</span></div>
+  <div class="stat-item"><span class="stat-num">90</span><span class="stat-label">Paired AI + clinical sessions</span></div>
+</div>
+
+<!-- WHAT IT DOES -->
+<section class="features" id="what-it-does">
+  <div class="section-tag">How it works</div>
+  <h2 class="section-title">Structured guidance at the point of care</h2>
+  <p class="section-sub">A two-step workflow designed for busy community health workers — no medical degree required.</p>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <h3>Structured patient intake</h3>
+      <p>Guides the health worker through patient age, gender, current medications, and known conditions before symptom entry — so nothing clinically important is missed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h3>Four-level triage output</h3>
+      <p>Returns a clear Green / Yellow / Orange / Red triage level with plain-language guidance — monitor, refer, or escalate urgently. Designed to support, not replace, the CHW's judgement.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Emergency detection</h3>
+      <p>Validated at 97.1% sensitivity across 8 critical emergency types including febrile seizure, acute MI, neonatal sepsis, pre-eclampsia, and hypertensive crisis. No emergency was missed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3>Session tracking</h3>
+      <p>Links each assessment to a site, institution, and session reference — making it easy to audit cases, follow up, and report to programme supervisors.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <h3>Safety-first by design</h3>
+      <p>When uncertain, the tool errs toward caution — over-referring rather than under-triaging. 99% of all outputs in the validation study were rated safe or borderline-safe.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>Built for CHW workflows</h3>
+      <p>Designed with and for ASHA workers, ANMs, and community health volunteers — not hospital clinicians. No prior clinical training required to use the tool effectively.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="audience">
+  <div class="section-tag">Who uses it</div>
+  <h2 class="section-title">Designed for frontline health workers</h2>
+  <p class="section-sub">Kinila AI Health is a decision-support tool for workers providing care in communities where specialist access is limited or delayed.</p>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="role-tag">Primary user</div>
+      <h4>ASHA workers</h4>
+      <p>Accredited Social Health Activists conducting household-level health assessments and referrals in rural and peri-urban communities.</p>
+    </div>
+    <div class="audience-card">
+      <div class="role-tag">Primary user</div>
+      <h4>ANMs &amp; CHOs</h4>
+      <p>Auxiliary Nurse Midwives and Community Health Officers at sub-centre and PHC level managing a wide range of clinical presentations.</p>
+    </div>
+    <div class="audience-card">
+      <div class="role-tag">Evaluator</div>
+      <h4>Health officials &amp; NGOs</h4>
+      <p>District health officers, programme managers, and NGO partners looking to support CHW decision-making with a validated AI tool.</p>
+    </div>
+    <div class="audience-card">
+      <div class="role-tag">Partner</div>
+      <h4>Funders &amp; researchers</h4>
+      <p>Institutions seeking evidence-based AI tools for community health in South Asian primary care settings — with a clear validation pathway and funded evaluation in progress.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALIDATION -->
+<section class="validation" id="validation">
+  <div class="section-tag">Evidence</div>
+  <h2 class="section-title">Validated at Yenepoya Medical College</h2>
+  <p class="section-sub">A structured validation study conducted in March 2026 using standardised clinical case scenarios reflecting PHC-level South Indian presentations across fever, GI, respiratory, obstetric, NCD, and paediatric categories.</p>
+
+  <div class="val-grid">
+    <div>
+      <div class="metrics-grid">
+        <div class="metric-card highlight">
+          <div class="metric-num">97.1%</div>
+          <div class="metric-label">Emergency sensitivity</div>
+          <div class="metric-note">33 of 34 RED cases correctly identified</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">99%</div>
+          <div class="metric-label">Safe output rate</div>
+          <div class="metric-note">73 safe · 16 borderline · 1 unsafe</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">81%</div>
+          <div class="metric-label">Overall triage accuracy</div>
+          <div class="metric-note">Meets pre-specified target of &gt;80%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">0.81</div>
+          <div class="metric-label">Weighted Kappa</div>
+          <div class="metric-note">Substantial agreement (target &gt;0.60 ✓)</div>
+        </div>
+        <div class="safety-block">
+          <h4>Safety profile — 90 paired sessions</h4>
+          <div class="safety-bar-wrap">
+            <div class="seg seg-safe">73 safe (81.1%)</div>
+            <div class="seg seg-border">16 borderline</div>
+            <div class="seg seg-unsafe">1</div>
+          </div>
+          <div class="safety-legend">
+            <span>■ Safe outputs</span>
+            <span>■ Borderline (reviewed — not dangerous)</span>
+            <span>■ Unsafe (1 case — adaptation target)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="val-context">
+      <div class="ctx-card">
+        <h4><span class="check">✓</span> Study design</h4>
+        <p>20 standardised clinical vignettes · 90 paired AI and student assessments · 4–5 participant groups · Conducted at Yenepoya Medical College, Mangalore as part of the EVAH Pathway A application.</p>
+      </div>
+      <div class="ctx-card">
+        <h4><span class="check">✓</span> Critical case performance</h4>
+        <p>All 8 RED emergency types — febrile seizure, acute MI (known and unknown history), severe dehydration, pre-eclampsia, neonatal sepsis, severe diarrhoea, and hypertensive crisis — correctly identified across every participant group.</p>
+      </div>
+      <div class="ctx-card">
+        <h4><span class="check">✓</span> Error pattern is clinically safe</h4>
+        <p>All errors are over-cautious (upward triage), never dangerous under-triage of emergencies. The 4 ORANGE under-triage cases are specific, addressable adaptation targets: TB screen, hypoglycaemia, PID, and diabetic foot.</p>
+      </div>
+      <div class="ctx-card">
+        <h4>→ Next phase</h4>
+        <p>The funded evaluation will deploy across 39 PHCs at SMIMS and Yenepoya, with actual CHWs as primary users and native language support integrated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTION -->
+<section class="institution">
+  <div class="section-tag">Research partnership</div>
+  <h2 class="section-title">Conducted in partnership with</h2>
+  <div class="inst-card">
+    <div class="inst-logo">
+      <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="114" fill="white" fill-opacity="0.2"/>
+        <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+        <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+        <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+        <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
+        <circle cx="358" cy="170" r="16" fill="white"/>
+      </svg>
+    </div>
+    <div class="inst-info">
+      <h3>Yenepoya Medical College, Mangalore, Karnataka</h3>
+      <p>The validation study was conducted at Yenepoya Medical College as part of the EVAH Pathway A application — a pre-deployment evaluation using standardised clinical case scenarios reflecting primary health centre presentations in South India. The funded evaluation will extend to 39 PHCs at both SMIMS and Yenepoya.</p>
+      <div class="pi-tag">Principal Investigator: <strong>Dr. MS Baliga</strong> &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp; EVAH Pathway A Application</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-tag">Behind the tool</div>
+  <h2 class="section-title">Built by Kinila Ventures</h2>
+  <p class="section-sub">Kinila AI Health is a product of Kinila Ventures, a partnership firm based in Udupi, Karnataka, working at the intersection of community health, life sciences, and AI.</p>
+  <div class="team-row">
+    <div class="team-card">
+      <h4>Kinila Ventures</h4>
+      <div class="team-role">Partnership firm · Udupi, Karnataka</div>
+      <p>Building tools and solutions at the intersection of community health, life sciences consultation, and applied AI for underserved populations in India.</p>
+      <a href="https://kinilaventures.com" class="kinila-link">kinilaventures.com →</a>
+    </div>
+    <div class="team-card">
+      <h4>Kinila Life Sciences</h4>
+      <div class="team-role">Biotech &amp; life sciences consultation</div>
+      <p>Expert consultation for biotech and pharmaceutical organisations navigating research, regulatory, and clinical development challenges in India and globally.</p>
+    </div>
+    <div class="team-card">
+      <h4>Kinila Commons</h4>
+      <div class="team-role">Community library initiative</div>
+      <p>A community-facing knowledge and library initiative connecting people in the Udupi region with learning resources, civic knowledge, and public information.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <h2>Ready to support your health workers?</h2>
+    <p>Whether you are a community health worker ready to use the tool, a health official evaluating it for your programme, or a funder interested in the evidence — we would like to hear from you.</p>
+  </div>
+  <div class="cta-cards">
+    <a href="https://care.kinila.in" class="cta-card">
+      <div>
+        <h4>Start using the tool</h4>
+        <p>For ASHA workers, ANMs, and community health volunteers</p>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+    <a href="mailto:hello@kinila.in" class="cta-card">
+      <div>
+        <h4>Get in touch</h4>
+        <p>For health officials, NGOs, funders, and research partners</p>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+    <a href="https://kinilaventures.com" class="cta-card">
+      <div>
+        <h4>About Kinila Ventures</h4>
+        <p>Learn more about the organisation behind this tool</p>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Kinila Ventures · Udupi, Karnataka, India</p>
+  <div class="footer-links">
+    <a href="https://kinilaventures.com">Kinila Ventures</a>
+    <a href="https://care.kinila.in">Launch tool</a>
+    <a href="mailto:hello@kinila.in">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
