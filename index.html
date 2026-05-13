@@ -1,1 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinila — Knowledge, Care & Community</title>
+<meta name="description" content="Kinila Ventures is a partnership firm based in Udupi, Karnataka, working at the intersection of community health, life sciences, and knowledge.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal:        #0D9488;
+    --teal-dark:   #0a7870;
+    --teal-deeper: #075f5a;
+    --teal-pale:   #e6f7f6;
+    --teal-mid:    #99f6e4;
+    --amber:       #d97706;
+    --amber-pale:  #fef3c7;
+    --amber-mid:   #fcd34d;
+    --sage:        #4d7c5f;
+    --sage-pale:   #ecf5f0;
+    --ink:         #0f1f1e;
+    --muted:       #587070;
+    --border:      #ddeae9;
+    --white:       #ffffff;
+    --off-white:   #f7fafa;
+    --warm-white:  #fdfaf7;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--warm-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,250,247,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6vw; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-wordmark { font-weight: 600; font-size: 1rem; color: var(--ink); letter-spacing: -0.01em; }
+  .nav-wordmark span { color: var(--teal); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-link { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-link:hover { color: var(--teal); }
+  .nav-location {
+    font-size: 0.78rem; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .nav-location::before { content: '📍'; font-size: 0.75rem; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 6vw 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+    background: var(--warm-white);
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--teal); border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: var(--ink);
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+  .hero h1 .warm { color: var(--amber); }
+
+  .hero-desc {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-arms {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .arm-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.82rem; font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .arm-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .arm-chip.care { background: var(--teal-pale); color: var(--teal-dark); border-color: var(--teal-mid); }
+  .arm-chip.life { background: var(--sage-pale); color: var(--sage); border-color: #b6d9c3; }
+  .arm-chip.commons { background: var(--amber-pale); color: var(--amber); border-color: var(--amber-mid); }
+  .arm-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+
+  /* MISSION BAND */
+  .mission-band {
+    background: var(--teal);
+    padding: 3rem 6vw;
+    display: flex; align-items: center; gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .mission-text {
+    flex: 1; min-width: 260px;
+  }
+  .mission-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: white; line-height: 1.2; margin-bottom: 0.75rem;
+  }
+  .mission-text h2 em { font-style: italic; color: var(--teal-mid); }
+  .mission-text p { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 440px; }
+  .mission-values {
+    display: flex; flex-direction: column; gap: 0.6rem;
+    flex-shrink: 0;
+  }
+  .value-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.85rem; color: rgba(255,255,255,0.85);
+  }
+  .value-row::before {
+    content: ''; width: 20px; height: 1.5px;
+    background: var(--teal-mid); border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* ARMS SECTION */
+  .arms { padding: 5rem 6vw; background: var(--warm-white); }
+  .section-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+  h2.section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--ink); line-height: 1.15; margin-bottom: 0.75rem; }
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
+
+  .arms-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .arm-card {
+    border-radius: 18px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+    border: 1.5px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .arm-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    border-radius: 4px 0 0 4px;
+  }
+  .arm-card:hover { transform: translateX(6px); box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+
+  .arm-card.care-card { background: var(--teal-pale); border-color: #b2d8d8; }
+  .arm-card.care-card::before { background: var(--teal); }
+  .arm-card.life-card { background: var(--sage-pale); border-color: #b6d9c3; }
+  .arm-card.life-card::before { background: var(--sage); }
+  .arm-card.commons-card { background: var(--amber-pale); border-color: #fcd34d; }
+  .arm-card.commons-card::before { background: var(--amber); }
+  .arm-card.coming { opacity: 0.65; pointer-events: none; }
+
+  .arm-label {
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .care-card .arm-label { color: var(--teal); }
+  .life-card .arm-label { color: var(--sage); }
+  .commons-card .arm-label { color: var(--amber); }
+
+  .arm-card h3 { font-size: 1.25rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+  .arm-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+
+  .arm-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.75rem; font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+  }
+  .care-card .arm-tag { background: rgba(13,148,136,0.12); color: var(--teal-dark); }
+  .life-card .arm-tag { background: rgba(77,124,95,0.12); color: var(--sage); }
+  .commons-card .arm-tag { background: rgba(217,119,6,0.12); color: var(--amber); }
+
+  .arm-arrow {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .arm-card:hover .arm-arrow { transform: translateX(4px); }
+  .care-card .arm-arrow { background: var(--teal); color: white; }
+  .life-card .arm-arrow { background: var(--sage); color: white; }
+  .commons-card .arm-arrow { background: var(--amber); color: white; }
+  .arm-arrow svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .coming-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.06);
+    color: var(--muted);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  /* WHERE WE WORK */
+  .location { padding: 5rem 6vw; background: var(--off-white); }
+  .location-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .location-text h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
+  .location-text p { font-size: 0.92rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+  .location-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .loc-tag {
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    background: var(--teal-pale); color: var(--teal-dark);
+    border: 1px solid var(--border);
+  }
+  .location-visual {
+    background: var(--teal-pale);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .loc-stat { display: flex; flex-direction: column; }
+  .loc-stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); line-height: 1; }
+  .loc-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .loc-divider { height: 1px; background: var(--border); }
+
+  /* CONTACT */
+  .contact { padding: 5rem 6vw; background: var(--warm-white); }
+  .contact-inner {
+    background: var(--teal);
+    border-radius: 20px;
+    padding: 3.5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .contact-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: white; line-height: 1.2; margin-bottom: 0.75rem; }
+  .contact-inner p { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    text-decoration: none; transition: background 0.2s;
+    gap: 1rem;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.18); }
+  .contact-link h4 { font-size: 0.92rem; font-weight: 600; color: white; margin-bottom: 0.1rem; }
+  .contact-link p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin: 0; }
+  .contact-link .arrow { color: var(--teal-mid); font-size: 1.1rem; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 2rem 6vw;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 8px; }
+  .footer-wordmark { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.5); }
+  .footer-wordmark span { color: var(--teal-mid); }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.78rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal-mid); }
+  footer p.copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .mission-band { padding: 2.5rem 1.5rem; gap: 2rem; }
+    .arms, .location, .contact { padding: 3.5rem 1.5rem; }
+    .location-inner, .contact-inner { grid-template-columns: 1fr; }
+    .contact-inner { padding: 2rem; }
+    .arm-card { grid-template-columns: 1fr; gap: 1rem; }
+    footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#0D9488"/>
+      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+      <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
+      <circle cx="358" cy="170" r="16" fill="white"/>
+    </svg>
+    <span class="nav-wordmark">Kinila <span>Ventures</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#arms" class="nav-link">Our work</a>
+    <a href="#location" class="nav-link">Where we work</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="1100" cy="80" r="320" fill="#e6f7f6" opacity="0.6"/>
+    <circle cx="1050" cy="650" r="180" fill="#fef3c7" opacity="0.5"/>
+    <circle cx="80" cy="580" r="200" fill="#ecf5f0" opacity="0.5"/>
+    <circle cx="200" cy="100" r="120" fill="#e6f7f6" opacity="0.4"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Kinila Ventures</div>
+    <h1>Making <em>science and knowledge</em> accessible to those who need it most</h1>
+    <p class="hero-desc">We are a partnership firm working at the intersection of community health, life sciences, and knowledge. Everything we build asks the same question: how do we get the right knowledge to the right people, at the right moment?</p>
+    <div class="hero-arms">
+      <a href="/care" class="arm-chip care"><span class="dot"></span>Kinila AI Health</a>
+      <a href="/lifesciences" class="arm-chip life"><span class="dot"></span>Kinila Life Sciences</a>
+      <a href="/commons" class="arm-chip commons"><span class="dot"></span>Kinila Commons</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION BAND -->
+<div class="mission-band">
+  <div class="mission-text">
+    <h2>One idea, <em>three expressions</em></h2>
+    <p>Knowledge locked away — in journals, in specialist offices, in clinical training — doesn't reach the people who need it most. Kinila exists to close that gap: bringing scientific knowledge to organisations navigating complex decisions, clinical knowledge to health workers at the point of care, and community knowledge to everyone.</p>
+  </div>
+  <div class="mission-values">
+    <div class="value-row">Accessible by design</div>
+    <div class="value-row">Evidence-driven</div>
+    <div class="value-row">Community first</div>
+    <div class="value-row">Built for the long term</div>
+  </div>
+</div>
+
+<!-- ARMS -->
+<section class="arms" id="arms">
+  <div class="section-tag">What we do</div>
+  <h2 class="section-title">Three arms, one purpose</h2>
+  <p class="section-sub">Each arm makes knowledge accessible to a different group of people who need it — health workers, scientific organisations, and the wider community.</p>
+
+  <div class="arms-stack">
+
+    <!-- AI Health -->
+    <a href="/care" class="arm-card care-card">
+      <div>
+        <div class="arm-label">Kinila AI Health</div>
+        <h3>Clinical knowledge at the point of care</h3>
+        <p>Community health workers carry enormous responsibility but rarely have specialist knowledge on hand. Kinila AI Health puts AI-assisted triage guidance in their hands — structured, validated, and plain-language — so the right clinical knowledge reaches the right person at the right moment.</p>
+        <span class="arm-tag">Validated · Early deployment · Karnataka</span>
+      </div>
+      <div class="arm-arrow">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <!-- Life Sciences -->
+    <div class="arm-card life-card coming">
+      <div>
+        <div class="arm-label">Kinila Life Sciences</div>
+        <h3>Scientific expertise where it is needed</h3>
+        <p>Biotech and pharmaceutical organisations often need deep domain knowledge at critical decision points — research design, regulatory navigation, clinical development. Kinila Life Sciences makes that expertise accessible to organisations that need it, without the overhead of a large consultancy.</p>
+        <span class="arm-tag">Consultation · Life sciences · Regulatory</span>
+      </div>
+      <span class="coming-badge">Coming soon</span>
+    </div>
+
+    <!-- Commons -->
+    <div class="arm-card commons-card coming">
+      <div>
+        <div class="arm-label">Kinila Commons</div>
+        <h3>Knowledge as a shared resource</h3>
+        <p>A library is the oldest and most democratic knowledge institution there is. Kinila Commons will be a shared space for reading, learning, and civic engagement in Udupi — built on the belief that knowledge belongs to the community, not just those who can afford access to it.</p>
+        <span class="arm-tag">Community · Knowledge · Udupi</span>
+      </div>
+      <span class="coming-badge">Coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHERE WE WORK -->
+<section class="location" id="location">
+  <div class="location-inner" style="grid-template-columns: 1fr;">
+    <div class="location-text">
+      <div class="section-tag">Where we work</div>
+      <h2>Rooted in coastal Karnataka, working across the world</h2>
+      <p>Kinila Ventures is based in coastal Karnataka — a region with a strong tradition of community life, healthcare, and education that shapes everything we do. Our community library and AI health tool serve this region directly.</p>
+      <p>Our life sciences consultation practice works with biotech and pharmaceutical organisations globally — bringing the same commitment to accessible, evidence-driven knowledge to clients wherever they are.</p>
+      <div class="location-tags">
+        <span class="loc-tag">Coastal Karnataka</span>
+        <span class="loc-tag">Primary health centres</span>
+        <span class="loc-tag">Community settings</span>
+        <span class="loc-tag">India</span>
+        <span class="loc-tag">Global</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2>Get in touch with Kinila</h2>
+      <p>Whether you are a health worker, a researcher, a funder, or someone in the community — we would like to hear from you. Kinila is a small, approachable organisation and we respond to every message.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:hello@kinila.in" class="contact-link">
+        <div>
+          <h4>Write to us</h4>
+          <p>hello@kinila.in · We respond within 2 working days</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="/care" class="contact-link">
+        <div>
+          <h4>Kinila AI Health</h4>
+          <p>Learn about the clinical decision support tool</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://kinilaventures.com" class="contact-link">
+        <div>
+          <h4>Kinila Ventures</h4>
+          <p>The formal home of the partnership firm</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#0D9488"/>
+      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+      <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
+      <circle cx="358" cy="170" r="16" fill="white"/>
+    </svg>
+    <span class="footer-wordmark">Kinila <span>Ventures</span></span>
+  </div>
+  <div class="footer-links">
+    <a href="/care">AI Health</a>
+    <a href="/lifesciences">Life Sciences</a>
+    <a href="/commons">Commons</a>
+    <a href="https://kinilaventures.com">Kinila Ventures</a>
+    <a href="mailto:hello@kinila.in">Contact</a>
+  </div>
+  <p class="copy">© 2026 Kinila Ventures · Udupi, Karnataka, India</p>
+</footer>
+
+</body>
+</html>
