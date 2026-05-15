@@ -519,85 +519,63 @@ footer p.copy{font-size:.72rem;color:rgba(255,255,255,.2)}
 <script>
 const SHEET_ID = '12ZAlOTruiKkGVvcBMb4FUfdZcVg28unS';
 const SHEET_NAME = 'Full Catalogue';
-const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
 
 const PER_PAGE = 25;
 let ALL_BOOKS = [];
 let filtered = [];
 let page = 1;
 
-// --- CSV Parser ---
-function parseCSV(text) {
-  const lines = text.trim().split('
-');
-  const headers = parseCSVLine(lines[0]);
-  return lines.slice(1).map(line => {
-    const vals = parseCSVLine(line);
-    const obj = {};
-    headers.forEach((h, i) => obj[h.trim()] = (vals[i] || '').trim());
+function parseGvizJSON(text) {
+  // Strip Google's JSONP wrapper
+  var clean = text.replace(/^[^{]*/, '').replace(/[^}]*$/, '');
+  var data = JSON.parse(clean);
+  var cols = data.table.cols.map(function(c){ return c.label; });
+  return data.table.rows.map(function(row){
+    var obj = {};
+    cols.forEach(function(col, i){
+      obj[col] = (row.c && row.c[i] && row.c[i].v !== null && row.c[i].v !== undefined) ? String(row.c[i].v).trim() : '';
+    });
     return obj;
-  }).filter(row => row[headers[0]]);
+  });
 }
 
-function parseCSVLine(line) {
-  const result = [];
-  let cur = '', inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-    if (ch === '"') {
-      if (inQuotes && line[i+1] === '"') { cur += '"'; i++; }
-      else inQuotes = !inQuotes;
-    } else if (ch === ',' && !inQuotes) {
-      result.push(cur); cur = '';
-    } else cur += ch;
-  }
-  result.push(cur);
-  return result;
-}
-
-// --- Map sheet columns to display fields ---
 function mapBook(row) {
-  // Flexible column mapping — works even if new columns are added
-  const title = row['Title'] || row['title caps'] || '';
-  const author = row['Author'] || row['Author caps'] || '';
-  const category = row['Category'] || '';
-  const subcategory = (row['Sub-category'] || '').replace('Buisiness', 'Business');
-  const status = row['Status'] || 'Available';
-  const language = row['Language'] || 'English';
-  const condition = row['Condition'] || '';
-  const donatedBy = row['Donated by'] || row['Donated By'] || '';
-  const notes = row['Notes'] || '';
-  const authorClean = ['V','v','Various',''].includes(author.trim()) ? 'Various' : author;
-  return { title, author: authorClean, category, subcategory, status, language, condition, donatedBy, notes };
+  var title = row['Title'] || row['title caps'] || '';
+  var author = row['Author'] || row['Author caps'] || '';
+  var category = row['Category'] || '';
+  var subcategory = (row['Sub-category'] || '').replace('Buisiness', 'Business');
+  var status = row['Status'] || 'Available';
+  var language = row['Language'] || 'English';
+  var condition = row['Condition'] || '';
+  var donatedBy = row['Donated by'] || row['Donated By'] || '';
+  var authorClean = ['V','v','Various',''].indexOf(author.trim()) >= 0 ? 'Various' : author;
+  return { title: title.trim(), author: authorClean.trim(), category: category.trim(), subcategory: subcategory.trim(), status: status.trim(), language: language.trim(), condition: condition.trim(), donatedBy: donatedBy.trim() };
 }
 
-// --- Fetch and initialise ---
 async function loadBooks() {
-  const loadingEl = document.getElementById('catalogueLoading');
-  const tableEl = document.getElementById('bookTable');
-  const paginationEl = document.getElementById('pagination');
+  var loadingEl = document.getElementById('catalogueLoading');
+  var tableEl = document.getElementById('bookTable');
+  var paginationEl = document.getElementById('pagination');
 
   try {
-    const res = await fetch(SHEET_URL);
-    if (!res.ok) throw new Error('Failed to fetch');
-    const text = await res.text();
-    const rows = parseCSV(text);
-    ALL_BOOKS = rows.map(mapBook).filter(b => b.title);
-    filtered = [...ALL_BOOKS];
+    var res = await fetch(SHEET_URL);
+    if (!res.ok) throw new Error('Failed');
+    var text = await res.text();
+    var rows = parseGvizJSON(text);
+    ALL_BOOKS = rows.map(mapBook).filter(function(b){ return b.title; });
+    filtered = ALL_BOOKS.slice();
 
-    // Populate genre filter dynamically
-    const genres = [...new Set(ALL_BOOKS.map(b => b.subcategory).filter(Boolean))].sort();
-    const genreFilter = document.getElementById('genreFilter');
+    // Populate genre filter
+    var genres = [];
+    ALL_BOOKS.forEach(function(b){ if(b.subcategory && genres.indexOf(b.subcategory) < 0) genres.push(b.subcategory); });
+    genres.sort();
+    var genreFilter = document.getElementById('genreFilter');
     genreFilter.innerHTML = '<option value="">All genres</option>';
-    genres.forEach(g => {
-      const o = document.createElement('option');
+    genres.forEach(function(g){
+      var o = document.createElement('option');
       o.value = g; o.textContent = g;
       genreFilter.appendChild(o);
-    });
-
-    // Update book count
-    document.querySelectorAll('.live-count').forEach(el => {
-      el.textContent = ALL_BOOKS.length.toLocaleString() + '+';
     });
 
     loadingEl.style.display = 'none';
@@ -606,18 +584,18 @@ async function loadBooks() {
     render();
 
   } catch(err) {
-    loadingEl.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Could not load the catalogue right now. Please try again shortly or <a href="mailto:commons@kinila.in" style="color:var(--amber)">contact us</a> for the full list.</p>';
+    loadingEl.innerHTML = '<p style="color:var(--muted);font-size:.85rem;text-align:center">Could not load the catalogue right now. Please try again shortly or <a href="mailto:commons@kinila.in" style="color:var(--amber)">contact us</a> for the book list.</p>';
   }
 }
 
 function applyFilters() {
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  const cat = document.getElementById('categoryFilter').value;
-  const genre = document.getElementById('genreFilter').value;
-  filtered = ALL_BOOKS.filter(b => {
-    const matchQ = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
-    const matchCat = !cat || b.category === cat;
-    const matchGenre = !genre || b.subcategory === genre;
+  var q = document.getElementById('searchInput').value.toLowerCase().trim();
+  var cat = document.getElementById('categoryFilter').value;
+  var genre = document.getElementById('genreFilter').value;
+  filtered = ALL_BOOKS.filter(function(b){
+    var matchQ = !q || b.title.toLowerCase().indexOf(q) >= 0 || b.author.toLowerCase().indexOf(q) >= 0;
+    var matchCat = !cat || b.category === cat;
+    var matchGenre = !genre || b.subcategory === genre;
     return matchQ && matchCat && matchGenre;
   });
   page = 1;
@@ -625,66 +603,68 @@ function applyFilters() {
 }
 
 function render() {
-  const tbody = document.getElementById('bookBody');
-  const total = filtered.length;
-  const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
-  const start = (page - 1) * PER_PAGE;
-  const slice = filtered.slice(start, start + PER_PAGE);
+  var tbody = document.getElementById('bookBody');
+  var total = filtered.length;
+  var totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+  var start = (page - 1) * PER_PAGE;
+  var slice = filtered.slice(start, start + PER_PAGE);
 
   document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
   document.getElementById('bookTable').style.display = total === 0 ? 'none' : 'table';
   document.getElementById('pagination').style.display = total === 0 ? 'none' : 'flex';
-  document.getElementById('resultsInfo').innerHTML = total === 0 ? '' :
-    `Showing <strong>${start+1}–${Math.min(start+PER_PAGE,total)}</strong> of <strong>${total}</strong> books`;
 
-  tbody.innerHTML = slice.map((b, i) => `
-    <tr>
-      <td style="color:var(--muted);font-size:.78rem">${start+i+1}</td>
-      <td><strong>${b.title}</strong></td>
-      <td>${b.author}</td>
-      <td><span class="badge ${b.category==='Fiction'?'badge-fiction':'badge-nonfiction'}">${b.subcategory||b.category}</span></td>
-      <td><span class="badge ${b.status==='Borrowed'?'badge-borrowed':'badge-available'}">${b.status||'Available'}</span></td>
-    </tr>
-  `).join('');
+  var info = total === 0 ? '' : 'Showing <strong>' + (start+1) + '–' + Math.min(start+PER_PAGE,total) + '</strong> of <strong>' + total + '</strong> books';
+  document.getElementById('resultsInfo').innerHTML = info;
+
+  var rows = '';
+  slice.forEach(function(b, i){
+    var badgeClass = b.category === 'Fiction' ? 'badge-fiction' : 'badge-nonfiction';
+    var statusClass = b.status === 'Borrowed' ? 'badge-borrowed' : 'badge-available';
+    rows += '<tr>' +
+      '<td style="color:var(--muted);font-size:.78rem">' + (start+i+1) + '</td>' +
+      '<td><strong>' + b.title + '</strong></td>' +
+      '<td>' + b.author + '</td>' +
+      '<td><span class="badge ' + badgeClass + '">' + (b.subcategory||b.category) + '</span></td>' +
+      '<td><span class="badge ' + statusClass + '">' + (b.status||'Available') + '</span></td>' +
+      '</tr>';
+  });
+  tbody.innerHTML = rows;
 
   document.getElementById('prevBtn').disabled = page === 1;
   document.getElementById('nextBtn').disabled = page === totalPages;
-  document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
+  document.getElementById('pageInfo').textContent = 'Page ' + page + ' of ' + totalPages;
 
-  const pageNums = document.getElementById('pageNums');
+  var pageNums = document.getElementById('pageNums');
   pageNums.innerHTML = '';
-  const range = [];
+  var range = [];
   if (totalPages <= 7) {
-    for (let i = 1; i <= totalPages; i++) range.push(i);
+    for (var i = 1; i <= totalPages; i++) range.push(i);
   } else {
     range.push(1);
-    if (page > 3) range.push('…');
-    for (let i = Math.max(2, page-1); i <= Math.min(totalPages-1, page+1); i++) range.push(i);
-    if (page < totalPages-2) range.push('…');
+    if (page > 3) range.push('...');
+    for (var i = Math.max(2, page-1); i <= Math.min(totalPages-1, page+1); i++) range.push(i);
+    if (page < totalPages-2) range.push('...');
     range.push(totalPages);
   }
-  range.forEach(p => {
-    if (p === '…') {
-      const s = document.createElement('span');
-      s.textContent = '…';
+  range.forEach(function(p){
+    if (p === '...') {
+      var s = document.createElement('span');
+      s.textContent = '...';
       s.style.cssText = 'display:flex;align-items:center;color:var(--muted);font-size:.8rem;padding:0 4px';
       pageNums.appendChild(s);
     } else {
-      const btn = document.createElement('button');
+      var btn = document.createElement('button');
       btn.className = 'page-num' + (p === page ? ' active' : '');
       btn.textContent = p;
-      btn.onclick = () => {
-        page = p;
-        render();
-        document.getElementById('catalogue').scrollIntoView({behavior:'smooth', block:'start'});
-      };
+      var pg = p;
+      btn.onclick = function(){ page = pg; render(); document.getElementById('catalogue').scrollIntoView({behavior:'smooth',block:'start'}); };
       pageNums.appendChild(btn);
     }
   });
 }
 
 function changePage(dir) {
-  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  var totalPages = Math.ceil(filtered.length / PER_PAGE);
   page = Math.max(1, Math.min(totalPages, page + dir));
   render();
   document.getElementById('catalogue').scrollIntoView({behavior:'smooth', block:'start'});
@@ -695,16 +675,16 @@ document.getElementById('categoryFilter').addEventListener('change', applyFilter
 document.getElementById('genreFilter').addEventListener('change', applyFilters);
 
 // Registration form
-const regCheck = document.getElementById('regCheck');
-const regSubmit = document.getElementById('regSubmit');
-regCheck.addEventListener('change', () => regSubmit.classList.toggle('active', regCheck.checked));
+var regCheck = document.getElementById('regCheck');
+var regSubmit = document.getElementById('regSubmit');
+regCheck.addEventListener('change', function(){ regSubmit.classList.toggle('active', regCheck.checked); });
 
-document.getElementById('regForm').addEventListener('submit', async e => {
+document.getElementById('regForm').addEventListener('submit', async function(e){
   e.preventDefault();
-  const name = e.target.reg_name.value.trim();
-  const phone = e.target.reg_phone.value.trim();
+  var name = e.target.reg_name.value.trim();
+  var phone = e.target.reg_phone.value.trim();
   if (!name || !phone) return;
-  regSubmit.textContent = 'Sending…';
+  regSubmit.textContent = 'Sending...';
   regSubmit.style.pointerEvents = 'none';
   try {
     await fetch('https://api.web3forms.com/submit', {
@@ -714,7 +694,8 @@ document.getElementById('regForm').addEventListener('submit', async e => {
         access_key: 'YOUR_ACCESS_KEY',
         subject: 'New Kinila Commons membership registration',
         from_name: 'Kinila Commons',
-        name, phone,
+        name: name,
+        phone: phone,
         email: e.target.reg_email.value,
         area: e.target.reg_area.value,
         age_group: e.target.reg_age.value,
@@ -726,7 +707,6 @@ document.getElementById('regForm').addEventListener('submit', async e => {
   document.getElementById('regSuccess').style.display = 'block';
 });
 
-// Load books on page start
 loadBooks();
 </script>
 </body>
