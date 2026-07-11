@@ -712,7 +712,17 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
     btn.style.pointerEvents = 'auto';
   }, 4000);
 });
-
+document.getElementById('regForm').style.display = 'none';
+  document.getElementById('regSuccess').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('regSuccess').style.display = 'none';
+    document.getElementById('regForm').style.display = 'block';
+    document.getElementById('regForm').reset();
+    regSubmit.textContent = 'Register interest';
+    regSubmit.style.pointerEvents = 'auto';
+    regSubmit.classList.remove('active');
+    document.getElementById('regCheck').checked = false;
+  }, 4000);
 loadBooks();
 </script>
 </body>
