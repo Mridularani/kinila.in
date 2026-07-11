@@ -703,8 +703,14 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
       })
     });
   } catch(err) {}
-  document.getElementById('regForm').style.display = 'none';
-  document.getElementById('regSuccess').style.display = 'block';
+  document.getElementById('enqSuccess').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('enqSuccess').style.display = 'none';
+    document.getElementById('enqForm').style.display = 'block';
+    document.getElementById('enqForm').reset();
+    btn.textContent = 'Send enquiry';
+    btn.style.pointerEvents = 'auto';
+  }, 4000);
 });
 
 loadBooks();
