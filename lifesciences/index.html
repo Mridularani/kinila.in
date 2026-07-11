@@ -588,8 +588,14 @@ document.getElementById('enqForm').addEventListener('submit', async e => {
       })
     });
   } catch(err) {}
-  document.getElementById('enqForm').style.display = 'none';
   document.getElementById('enqSuccess').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('enqSuccess').style.display = 'none';
+    document.getElementById('enqForm').style.display = 'block';
+    document.getElementById('enqForm').reset();
+    btn.textContent = 'Send enquiry';
+    btn.style.pointerEvents = 'auto';
+  }, 4000);
 });
 </script>
 
