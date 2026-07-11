@@ -580,7 +580,9 @@ document.getElementById('enqForm').addEventListener('submit', async e => {
         access_key: 'dd04c930-4954-46fb-b6c5-0223fabe18ba',
         subject: 'New Kinila Life Sciences enquiry',
         from_name: 'Kinila Life Sciences',
-        name, organisation: org, email,
+        name: name,
+        email: email,
+        organisation: org,
         area: e.target.enq_area.value,
         message: e.target.enq_message.value
       })
