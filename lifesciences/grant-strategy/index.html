@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grant Strategy Partnership — Kinila Life Sciences</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sage:#2d5a4a;--sage-mid:#3d7a62;--sage-light:#4d9a7a;
+  --sage-pale:#edf5f1;--sage-border:#c5ddd5;
+  --gold:#b5933a;--gold-pale:#faf4e8;--gold-mid:#d4b06a;
+  --ink:#0e1a16;--muted:#5a7268;--border:#dde8e3;
+  --white:#ffffff;--warm:#fafcfb;--off:#f3f7f5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--warm);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 6vw}
+a{color:var(--sage);text-decoration:none}
+a:hover{color:var(--sage-mid)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,252,251,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 6vw;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-wordmark{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.15rem;color:var(--ink);letter-spacing:.02em}
+.nav-wordmark span{color:var(--sage-mid)}
+.nav-back{font-size:.85rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--sage)}
+
+/* BREADCRUMB */
+.crumb{padding:6rem 0 0;font-size:.82rem;color:var(--muted)}
+.crumb a{color:var(--sage);font-weight:500}
+
+/* HERO */
+.hero{padding:2.5rem 0 3rem}
+.kicker{font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.kicker::before{content:'';width:24px;height:2px;background:var(--sage);border-radius:2px}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:1.1rem;max-width:820px}
+h1 em{font-style:italic;color:var(--sage-mid)}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:640px;margin-bottom:2.5rem;font-weight:300;line-height:1.75}
+
+/* STAT BAR */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding:1.75rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--sage);line-height:1}
+.stat-label{font-size:.75rem;color:var(--muted);margin-top:3px}
+
+/* INTRO */
+.intro{padding:3rem 0 .5rem}
+.intro p{font-size:1rem;max-width:720px;color:var(--muted);line-height:1.8;font-weight:300;border-left:3px solid var(--sage);padding-left:1.25rem}
+
+/* SECTIONS */
+section{padding:4rem 0}
+.section-alt{background:var(--off)}
+.section-kicker{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--ink);margin-bottom:.6rem;line-height:1.15}
+.section-lead{font-size:.92rem;color:var(--muted);max-width:580px;margin-bottom:2.5rem;font-weight:300;line-height:1.75}
+
+/* TIER GRID */
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem}
+.tier{padding-top:1.25rem;border-top:2px solid var(--sage)}
+.tier-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--sage-border);margin-bottom:.6rem}
+.tier-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.tier-desc{font-size:.875rem;color:var(--muted);margin-bottom:.5rem;line-height:1.65;font-weight:300}
+.tier-best{font-size:.78rem;color:var(--muted);font-weight:400}
+.tier-best span{color:var(--sage);font-weight:600}
+
+/* WHY LIST */
+.why-list{display:flex;flex-direction:column;gap:0}
+.why-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--border)}
+.why-item:first-child{border-top:1px solid var(--border)}
+.why-dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--sage);margin-top:.45rem}
+.why-text{font-size:.9rem;color:var(--muted);line-height:1.7;font-weight:300}
+
+/* FEE NOTE */
+.note-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2rem;border-left:3px solid var(--sage)}
+.note-card p{font-size:.92rem;color:var(--muted);line-height:1.8;font-weight:300}
+
+/* CTA */
+.cta{background:var(--sage);border-radius:12px;padding:3rem;color:white;margin:0}
+.cta h2{color:white;margin-bottom:.75rem}
+.cta p{color:rgba(255,255,255,.75);max-width:500px;margin-bottom:1.75rem;font-size:.92rem;font-weight:300;line-height:1.75}
+.btn{display:inline-block;background:white;color:var(--sage);font-weight:600;font-size:.9rem;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;transition:box-shadow .2s,transform .2s}
+.btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.15);transform:translateY(-1px)}
+
+/* FOOTER */
+footer{padding:2.5rem 0 3.5rem;font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);margin-top:1.5rem}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{color:var(--sage);text-decoration:none;font-weight:500;font-size:.8rem}
+.footer-links a:hover{color:var(--sage-mid)}
+
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr)}
+  .tier-grid{grid-template-columns:1fr}
+  .cta{padding:2rem 1.5rem}
+  nav{padding:0 1.5rem}
+  .wrap{padding:0 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/lifesciences" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#2d5a4a"/>
+      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+      <circle cx="358" cy="170" r="28" fill="#4d9a7a"/>
+      <circle cx="358" cy="170" r="16" fill="white"/>
+    </svg>
+    <span class="nav-wordmark">Kinila <span>Life Sciences</span></span>
+  </a>
+  <a href="/lifesciences" class="nav-back">← Back to Life Sciences</a>
+</nav>
+
+<div class="wrap crumb">
+  <a href="/lifesciences">Kinila Life Sciences</a> &nbsp;/&nbsp; Grant Strategy Partnership
+</div>
+
+<header class="wrap hero">
+  <p class="kicker">Grant Strategy Partnership</p>
+  <h1>Turning strong research ideas into <em>fundable, competitive</em> proposals</h1>
+  <p class="hero-sub">For faculty and institutions without an in-house grants office — from a focused strategy review through submission and, where it makes sense, into implementation.</p>
+  <div class="stat-bar">
+    <div class="stat"><div class="stat-num">18+</div><div class="stat-label">Years experience</div></div>
+    <div class="stat"><div class="stat-num">60+</div><div class="stat-label">Countries</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Ways to engage</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Success fees</div></div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <p>Research capacity in low- and middle-income countries is often strongest at the science and weakest at the funding layer. Talented researchers at under-resourced universities have strong ideas but limited time, no dedicated grants office, and few international connections to strengthen a proposal's credibility. Kinila partners directly with LMIC faculty and institutions to close that gap — and with HIC researchers who want genuine, not token, LMIC co-investigators on their proposals.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <p class="section-kicker">What We Offer</p>
+    <h2>Four ways to work together</h2>
+    <p class="section-lead">Scaled to how much support a proposal actually needs — from a single focused review to an ongoing institutional role.</p>
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="tier-num">01</div>
+        <p class="tier-title">Proposal Strategy Sprint</p>
+        <p class="tier-desc">Focused review of a concept note or draft — reviewer-eye feedback, work package restructuring, and framing for competitiveness.</p>
+        <p class="tier-best"><span>Best for:</span> a specific upcoming deadline</p>
+      </div>
+      <div class="tier">
+        <div class="tier-num">02</div>
+        <p class="tier-title">Embedded Co-Development</p>
+        <p class="tier-desc">A named, budgeted role on the proposal team — strategy, structure, and writing support from concept through submission, with continued involvement in implementation if funded.</p>
+        <p class="tier-best"><span>Best for:</span> high-value, complex, multi-partner bids</p>
+      </div>
+      <div class="tier">
+        <div class="tier-num">03</div>
+        <p class="tier-title">Institutional Retainer</p>
+        <p class="tier-desc">An ongoing "virtual grants office" function — tracking relevant calls, pre-screening proposals before submission, coaching junior faculty.</p>
+        <p class="tier-best"><span>Best for:</span> institutions without a research office</p>
+      </div>
+      <div class="tier">
+        <div class="tier-num">04</div>
+        <p class="tier-title">Cohort Workshops</p>
+        <p class="tier-desc">Structured group sessions on proposal structure, reviewer psychology, and budget logic for multiple faculty at once.</p>
+        <p class="tier-best"><span>Best for:</span> building capacity across a department</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="section-kicker">Why Kinila</p>
+    <h2>Background this draws on</h2>
+    <div class="why-list">
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">PhD in Biochemistry/Molecular Biology; 18+ years across diagnostics, digital health, regulatory affairs, and global health systems spanning 60+ countries.</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Currently supporting a multi-institution antimicrobial resistance stewardship proposal for a South Indian university consortium, as sole LMIC-based strategic lead.</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Live tracking of funding windows across ICMR, DBT/Wellcome Trust India Alliance, EDCTP3, Novo Nordisk Foundation, Coefficient Giving, and Wellcome Discovery Awards.</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Working relationships with HIC collaborators across UK research networks — helping LMIC researchers build genuine, not token, co-investigator partnerships.</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">A record of taking research past the proposal stage: co-developer of an AI clinical decision support tool now deployed with community health workers in Karnataka.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <p class="section-kicker">How Engagement Works</p>
+    <h2>Fee structure</h2>
+    <div class="note-card">
+      <p>Fees are structured as a transparent, budgeted role within the proposal itself, or as an institutional retainer — never as a contingency or success fee, in line with standard funder and institutional conflict-of-interest norms. Where a project succeeds, we remain available to support implementation, not just the paperwork that got it funded.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Have an idea that deserves a stronger shot?</h2>
+      <p>Tell us about the researcher, the institution, and the call you're aiming for — we'll give you an honest read on whether, and how, we can help.</p>
+      <a class="btn" href="/lifesciences#enquiry">Send an enquiry →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="footer-links">
+    <a href="/">Kinila Ventures</a>
+    <a href="/lifesciences">Life Sciences</a>
+    <a href="/care">AI Health</a>
+    <a href="/commons">Commons</a>
+    <a href="mailto:lifesciences@kinila.in">Contact</a>
+  </div>
+  <div>Kinila Life Sciences · A Kinila Ventures practice · Bangalore &amp; Udupi, India</div>
+</footer>
+
+</body>
+</html>
