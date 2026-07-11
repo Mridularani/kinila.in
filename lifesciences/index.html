@@ -588,7 +588,7 @@ document.getElementById('enqForm').addEventListener('submit', async e => {
       })
     });
   } catch(err) {}
-  document.getElementById('enqSuccess').style.display = 'block';
+  document.getElementById('enqSuccess').style.cssText = 'display:block;text-align:center;padding:2rem';
   setTimeout(() => {
     document.getElementById('enqSuccess').style.display = 'none';
     document.getElementById('enqForm').style.display = 'block';
