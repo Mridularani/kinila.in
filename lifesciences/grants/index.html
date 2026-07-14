@@ -319,7 +319,7 @@ async function loadGrants() {
     return;
   }
   try {
-    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
+    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(SHEET_NAME);
     var res = await fetch(url);
     var text = await res.text();
     var rows = parseGvizJSON(text);
