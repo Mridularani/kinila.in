@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Health & LMIC Research Grants Tracker 2026 — Kinila Life Sciences</title>
+<meta name="description" content="A regularly updated tracker of open research funding opportunities in global health, LMIC settings, biotech, diagnostics, community health, and antimicrobial resistance. Maintained by Kinila Life Sciences.">
+<meta name="keywords" content="global health grants 2026, LMIC research funding, Wellcome Trust India, ICMR grants, EDCTP3, global health research funding deadlines, biotech grants India, community health funding, AMR research grants">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sage:#2d5a4a;--sage-mid:#3d7a62;--sage-light:#4d9a7a;
+  --sage-pale:#edf5f1;--sage-border:#c5ddd5;
+  --amber:#d97706;--amber-pale:#fef3c7;
+  --red:#dc2626;--red-pale:#fee2e2;
+  --green:#059669;--green-pale:#d1fae5;
+  --ink:#0e1a16;--muted:#5a7268;--border:#dde8e3;
+  --white:#ffffff;--warm:#fafcfb;--off:#f3f7f5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--warm);-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,252,251,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 6vw;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-wordmark{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.15rem;color:var(--ink);letter-spacing:.02em}
+.nav-wordmark span{color:var(--sage-mid)}
+.nav-links{display:flex;align-items:center;gap:1.5rem}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.875rem;transition:color .2s}
+.nav-link:hover{color:var(--sage)}
+.btn-nav{background:var(--sage);color:white;border:none;padding:.5rem 1.2rem;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s}
+.btn-nav:hover{background:var(--sage-mid)}
+
+/* HERO */
+.hero{padding:7rem 6vw 3rem;background:var(--sage)}
+.hero-inner{max-width:900px}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';width:24px;height:2px;background:rgba(255,255,255,.4);border-radius:2px}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;color:white;line-height:1.1;margin-bottom:1rem}
+h1 em{font-style:italic;color:#99f6e4}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.72);max-width:600px;line-height:1.75;font-weight:300;margin-bottom:2rem}
+.hero-meta{display:flex;gap:2rem;flex-wrap:wrap}
+.meta-item{font-size:.78rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px}
+.meta-dot{width:6px;height:6px;border-radius:50%;background:#99f6e4}
+
+/* FILTERS */
+.filters-wrap{background:white;border-bottom:1px solid var(--border);padding:1rem 6vw;position:sticky;top:64px;z-index:90}
+.filters{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.search-input{height:38px;padding:0 12px 0 36px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--ink);outline:none;transition:border-color .2s;flex:1;min-width:200px;max-width:320px;background:var(--warm) url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a7268' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center}
+.search-input:focus{border-color:var(--sage)}
+.filter-select{height:38px;padding:0 28px 0 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--ink);background:var(--warm) url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a7268' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 8px center;appearance:none;-webkit-appearance:none;outline:none;cursor:pointer;transition:border-color .2s}
+.filter-select:focus{border-color:var(--sage)}
+.results-count{font-size:.78rem;color:var(--muted);margin-left:auto}
+
+/* MAIN */
+.main{padding:2rem 6vw 5rem;max-width:1200px}
+
+/* GRANT TABLE */
+.grant-table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:2rem}
+.grant-table th{text-align:left;padding:.75rem 1rem;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--sage-pale);border-bottom:1px solid var(--border)}
+.grant-table td{padding:.9rem 1rem;font-size:.85rem;color:var(--ink);border-bottom:1px solid #f0f5f3;vertical-align:top}
+.grant-table tr:last-child td{border-bottom:none}
+.grant-table tr:hover td{background:#f7fcfa}
+
+.grant-name{font-weight:600;color:var(--ink);margin-bottom:2px}
+.grant-funder{font-size:.78rem;color:var(--muted)}
+.category-tag{display:inline-block;padding:.18rem .6rem;border-radius:100px;font-size:.68rem;font-weight:600;background:var(--sage-pale);color:var(--sage);white-space:nowrap}
+.deadline-text{font-size:.85rem;font-weight:500;white-space:nowrap}
+.deadline-soon{color:var(--amber)}
+.deadline-open{color:var(--ink)}
+.deadline-closed{color:var(--muted);text-decoration:line-through}
+
+.status-badge{display:inline-flex;align-items:center;gap:4px;padding:.22rem .7rem;border-radius:100px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.status-open{background:var(--green-pale);color:var(--green)}
+.status-soon{background:var(--amber-pale);color:var(--amber)}
+.status-closed{background:#f1f5f3;color:var(--muted)}
+
+.grant-link{display:inline-flex;align-items:center;gap:4px;color:var(--sage);text-decoration:none;font-size:.8rem;font-weight:500;padding:.3rem .75rem;border:1px solid var(--sage-border);border-radius:6px;transition:background .2s,color .2s;white-space:nowrap}
+.grant-link:hover{background:var(--sage);color:white;border-color:var(--sage)}
+.grant-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.no-results{text-align:center;padding:3rem;color:var(--muted);font-size:.88rem}
+.loading{text-align:center;padding:3rem;color:var(--muted);font-size:.88rem;display:flex;align-items:center;justify-content:center;gap:.75rem}
+.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--sage);border-radius:50%;animation:spin .7s linear infinite}
+
+/* SIDEBAR LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start}
+.sidebar{position:sticky;top:130px}
+.sidebar-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem}
+.sidebar-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem}
+.sidebar-card p{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:.75rem}
+.sidebar-card a{display:inline-flex;align-items:center;gap:5px;font-size:.82rem;font-weight:500;color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage-border);padding-bottom:1px}
+.sidebar-card a:hover{border-color:var(--sage)}
+.update-note{font-size:.72rem;color:var(--muted);font-style:italic;margin-top:.5rem;display:block}
+.category-list{display:flex;flex-direction:column;gap:.4rem;margin-top:.75rem}
+.cat-filter-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:.4rem .75rem;font-family:'DM Sans',sans-serif;font-size:.78rem;color:var(--muted);cursor:pointer;text-align:left;transition:all .2s}
+.cat-filter-btn:hover,.cat-filter-btn.active{background:var(--sage-pale);border-color:var(--sage-border);color:var(--sage);font-weight:500}
+
+/* DISCLAIMER */
+.disclaimer{background:var(--off);border:1px solid var(--border);border-radius:10px;padding:1.25rem;font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.disclaimer strong{color:var(--ink)}
+
+/* CTA STRIP */
+.cta-strip{background:var(--sage);border-radius:12px;padding:2rem;color:white;margin-top:1.5rem}
+.cta-strip h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:white;margin-bottom:.4rem}
+.cta-strip p{font-size:.82rem;color:rgba(255,255,255,.72);line-height:1.6;margin-bottom:1rem;font-weight:300}
+.cta-strip a{display:inline-block;background:white;color:var(--sage);font-size:.82rem;font-weight:600;padding:.6rem 1.25rem;border-radius:6px;text-decoration:none;transition:box-shadow .2s}
+.cta-strip a:hover{box-shadow:0 4px 12px rgba(0,0,0,.15)}
+
+footer{background:var(--ink);padding:2rem 6vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-wordmark{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.4)}
+.footer-wordmark span{color:#4d9a7a}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:rgba(255,255,255,.35);text-decoration:none;font-size:.78rem;transition:color .2s}
+.footer-links a:hover{color:#4d9a7a}
+footer p.copy{font-size:.72rem;color:rgba(255,255,255,.2)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  nav .nav-links{display:none}
+  nav{padding:0 1.5rem}
+  .hero{padding:6rem 1.5rem 2.5rem}
+  .filters-wrap{padding:1rem 1.5rem}
+  .main{padding:1.5rem 1.5rem 4rem}
+  footer{padding:1.5rem;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/lifesciences" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#2d5a4a"/>
+      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
+      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
+      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
+      <circle cx="358" cy="170" r="28" fill="#4d9a7a"/>
+      <circle cx="358" cy="170" r="16" fill="white"/>
+    </svg>
+    <span class="nav-wordmark">Kinila <span>Life Sciences</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="/lifesciences" class="nav-link">← Life Sciences</a>
+    <a href="/lifesciences#enquiry" class="btn-nav">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Research Funding Tracker</div>
+    <h1>Global health & LMIC research grants — <em>open now</em></h1>
+    <p class="hero-sub">A regularly updated tracker of open funding opportunities across global health, LMIC research, biotech, diagnostics, community health, and antimicrobial resistance. Maintained by Kinila Life Sciences.</p>
+    <div class="hero-meta">
+      <span class="meta-item"><span class="meta-dot"></span>Updated regularly</span>
+      <span class="meta-item"><span class="meta-dot"></span>Global health focus</span>
+      <span class="meta-item"><span class="meta-dot"></span>LMIC-relevant opportunities</span>
+      <span class="meta-item"><span class="meta-dot"></span>Direct links to funders</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filters">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search grants, funders…">
+    <select class="filter-select" id="categoryFilter">
+      <option value="">All categories</option>
+      <option>Global Health</option>
+      <option>AMR & Stewardship</option>
+      <option>Diagnostics</option>
+      <option>Community Health</option>
+      <option>Biotech & Pharma</option>
+      <option>AI & Digital Health</option>
+      <option>Nutrition</option>
+      <option>Vaccines</option>
+    </select>
+    <select class="filter-select" id="statusFilter">
+      <option value="">All statuses</option>
+      <option value="Open">Open</option>
+      <option value="Closing Soon">Closing Soon</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <span class="results-count" id="resultsCount"></span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="layout">
+
+    <!-- TABLE -->
+    <div>
+      <div class="disclaimer">
+        <strong>Note:</strong> Grant details are maintained in good faith but deadlines and eligibility can change. Always verify directly with the funder before preparing a submission. Links open the funder's official page.
+      </div>
+
+      <div id="loadingState" class="loading">
+        <div class="spinner"></div>
+        Loading grants…
+      </div>
+
+      <table class="grant-table" id="grantsTable" style="display:none">
+        <thead>
+          <tr>
+            <th>Grant / Funder</th>
+            <th>Category</th>
+            <th>Eligibility</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="grantsBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults" style="display:none">No grants found matching your search.</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <h3>Filter by category</h3>
+        <div class="category-list" id="categoryButtons"></div>
+      </div>
+
+      <div class="cta-strip">
+        <h3>Need help with a proposal?</h3>
+        <p>Kinila Life Sciences works directly with LMIC researchers and institutions on grant strategy, proposal development, and submission.</p>
+        <a href="/lifesciences/grant-strategy">Learn about grant strategy →</a>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Suggest a grant</h3>
+        <p>Know of a funding opportunity that should be on this list? Let us know.</p>
+        <a href="mailto:kinila.care@gmail.com?subject=Grant suggestion for tracker">Send us a suggestion →</a>
+        <span class="update-note">This tracker is updated as new opportunities are identified. Bookmark this page and check back regularly.</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span class="footer-wordmark">Kinila <span>Life Sciences</span></span>
+  <div class="footer-links">
+    <a href="/">Kinila Ventures</a>
+    <a href="/lifesciences">Life Sciences</a>
+    <a href="/lifesciences/grant-strategy">Grant Strategy</a>
+    <a href="mailto:kinila.care@gmail.com">Contact</a>
+  </div>
+  <p class="copy">© 2026 Kinila Ventures · Udupi, Karnataka</p>
+</footer>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+// Replace with your Google Sheet ID and make sure the sheet tab is named 'Grants'
+// Columns needed: Funder | Grant Name | Category | Eligibility | Deadline | Status | Link
+const SHEET_ID = '106Wubd2px4s91aib-BRJws-_8MmnIng7IVD0EIt-jRc';
+const SHEET_NAME = 'Grants';
+const USE_SAMPLE = false; // ← set to true to use sample data instead
+
+// ─── SAMPLE DATA (shown until sheet is connected) ────────────────────────────
+const SAMPLE_GRANTS = [
+  { funder:'Wellcome Trust', name:'Discovery Awards', category:'Global Health', eligibility:'LMIC and HIC researchers', deadline:'Rolling', status:'Open', link:'https://wellcome.org/grant-funding/schemes/discovery-awards' },
+  { funder:'DBT / Wellcome Trust India Alliance', name:'Intermediate Fellowship', category:'Global Health', eligibility:'Indian nationals, early-mid career', deadline:'Rolling', status:'Open', link:'https://www.indiaalliance.org/fellowships/intermediate' },
+  { funder:'EDCTP3', name:'Research & Innovation Actions', category:'Global Health', eligibility:'LMIC institutions (Sub-Saharan Africa & India)', deadline:'Varies by call', status:'Open', link:'https://www.edctp.org/funding/' },
+  { funder:'ICMR', name:'Extramural Research Programme', category:'Global Health', eligibility:'Indian institutions', deadline:'Rolling', status:'Open', link:'https://www.icmr.gov.in/ctr_extramural.html' },
+  { funder:'Novo Nordisk Foundation', name:'One Health Initiative', category:'AMR & Stewardship', eligibility:'Global, LMIC encouraged', deadline:'Check website', status:'Open', link:'https://novonordiskfonden.dk/en/grants/' },
+  { funder:'BIRAC', name:'BIPP — Biotechnology Ignition Grant', category:'Biotech & Pharma', eligibility:'Indian startups & institutions', deadline:'Rolling', status:'Open', link:'https://birac.nic.in/bipp.php' },
+  { funder:'Wellcome Trust', name:'Leap — Tackling AMR', category:'AMR & Stewardship', eligibility:'Global', deadline:'Closed — watch for next round', status:'Closed', link:'https://wellcome.org/grant-funding/schemes/leap-tackling-antimicrobial-resistance' },
+  { funder:'Coefficient Giving', name:'Global Health Innovation Grant', category:'Global Health', eligibility:'LMIC-focused projects', deadline:'Rolling', status:'Open', link:'https://www.coefficientgiving.org/' },
+  { funder:'Grand Challenges Canada', name:'Stars in Global Health', category:'Community Health', eligibility:'LMIC innovators', deadline:'Rolling', status:'Open', link:'https://www.grandchallenges.ca/programs/stars-in-global-health/' },
+  { funder:'NIHR', name:'Global Health Research Groups', category:'Global Health', eligibility:'UK lead with LMIC partner', deadline:'Check website', status:'Open', link:'https://www.nihr.ac.uk/explore-nihr/funding-programmes/global-health-research.htm' },
+  { funder:'Bill & Melinda Gates Foundation', name:'Grand Challenges Explorations', category:'Global Health', eligibility:'Global, LMIC encouraged', deadline:'Rolling', status:'Open', link:'https://gcgh.grandchallenges.org/' },
+  { funder:'European Commission / Horizon', name:'Global Health & Infectious Diseases', category:'Global Health', eligibility:'Consortium including LMIC partners', deadline:'Varies', status:'Open', link:'https://ec.europa.eu/info/funding-tenders/opportunities/portal/' },
+  { funder:'USAID', name:'Development Innovation Ventures', category:'Community Health', eligibility:'Global', deadline:'Rolling', status:'Open', link:'https://www.usaid.gov/div' },
+  { funder:'Fogarty International Center (NIH)', name:'Global Health Research Training', category:'Global Health', eligibility:'US institution with LMIC partner', deadline:'Varies', status:'Open', link:'https://www.fic.nih.gov/Grants/Pages/default.aspx' },
+  { funder:'ANRF India', name:'MAHA Water Program', category:'Community Health', eligibility:'Indian institutions', deadline:'Check website', status:'Open', link:'https://anrf.gov.in/' },
+];
+
+// ─── GOOGLE SHEETS FETCH ─────────────────────────────────────────────────────
+function parseGvizJSON(text) {
+  var clean = text.replace(/^[^{]*/, '').replace(/[^}]*$/, '');
+  var data = JSON.parse(clean);
+  var cols = data.table.cols.map(function(c){ return c.label; });
+  return data.table.rows.map(function(row){
+    var obj = {};
+    cols.forEach(function(col, i){
+      obj[col] = (row.c && row.c[i] && row.c[i].v !== null) ? String(row.c[i].v).trim() : '';
+    });
+    return obj;
+  });
+}
+
+function mapGrant(row) {
+  return {
+    funder: row['Funder'] || '',
+    name: row['Grant Name'] || '',
+    category: row['Category'] || '',
+    eligibility: row['Eligibility'] || '',
+    deadline: row['Deadline'] || '',
+    status: row['Status'] || 'Open',
+    link: row['Link'] || ''
+  };
+}
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let ALL_GRANTS = [];
+let filtered = [];
+
+async function loadGrants() {
+  if (USE_SAMPLE) {
+    ALL_GRANTS = SAMPLE_GRANTS;
+    init();
+    return;
+  }
+  try {
+    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
+    var res = await fetch(url);
+    var text = await res.text();
+    var rows = parseGvizJSON(text);
+    ALL_GRANTS = rows.map(mapGrant).filter(function(g){ return g.name; });
+    init();
+  } catch(err) {
+    ALL_GRANTS = SAMPLE_GRANTS;
+    init();
+  }
+}
+
+function init() {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('grantsTable').style.display = 'table';
+  filtered = ALL_GRANTS.slice();
+  buildCategoryButtons();
+  render();
+}
+
+function buildCategoryButtons() {
+  var cats = [...new Set(ALL_GRANTS.map(function(g){ return g.category; }).filter(Boolean))].sort();
+  var container = document.getElementById('categoryButtons');
+  var allBtn = document.createElement('button');
+  allBtn.className = 'cat-filter-btn active';
+  allBtn.textContent = 'All categories';
+  allBtn.onclick = function(){ setCategory(''); };
+  container.appendChild(allBtn);
+  cats.forEach(function(cat){
+    var btn = document.createElement('button');
+    btn.className = 'cat-filter-btn';
+    btn.textContent = cat;
+    btn.onclick = function(){ setCategory(cat); };
+    container.appendChild(btn);
+  });
+}
+
+function setCategory(cat) {
+  document.getElementById('categoryFilter').value = cat;
+  document.querySelectorAll('.cat-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.textContent === (cat || 'All categories'));
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  var q = document.getElementById('searchInput').value.toLowerCase().trim();
+  var cat = document.getElementById('categoryFilter').value;
+  var status = document.getElementById('statusFilter').value;
+  filtered = ALL_GRANTS.filter(function(g){
+    var matchQ = !q || g.name.toLowerCase().includes(q) || g.funder.toLowerCase().includes(q) || g.eligibility.toLowerCase().includes(q);
+    var matchCat = !cat || g.category === cat;
+    var matchStatus = !status || g.status === status;
+    return matchQ && matchCat && matchStatus;
+  });
+  render();
+}
+
+function render() {
+  var tbody = document.getElementById('grantsBody');
+  var total = filtered.length;
+  document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+  document.getElementById('grantsTable').style.display = total === 0 ? 'none' : 'table';
+  document.getElementById('resultsCount').textContent = total + ' grant' + (total !== 1 ? 's' : '');
+
+  tbody.innerHTML = filtered.map(function(g){
+    var statusClass = g.status === 'Open' ? 'status-open' : g.status === 'Closing Soon' ? 'status-soon' : 'status-closed';
+    var deadlineClass = g.status === 'Closing Soon' ? 'deadline-soon' : g.status === 'Closed' ? 'deadline-closed' : 'deadline-open';
+    var linkBtn = g.link ? '<a href="' + g.link + '" target="_blank" rel="noopener" class="grant-link">Details <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>' : '<span style="color:var(--muted);font-size:.78rem">—</span>';
+    return '<tr>' +
+      '<td><div class="grant-name">' + g.name + '</div><div class="grant-funder">' + g.funder + '</div></td>' +
+      '<td><span class="category-tag">' + g.category + '</span></td>' +
+      '<td style="font-size:.82rem;color:var(--muted);max-width:180px;line-height:1.5">' + g.eligibility + '</td>' +
+      '<td><span class="deadline-text ' + deadlineClass + '">' + g.deadline + '</span></td>' +
+      '<td><span class="status-badge ' + statusClass + '">' + g.status + '</span></td>' +
+      '<td>' + linkBtn + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('categoryFilter').addEventListener('change', function(){
+  var cat = this.value;
+  document.querySelectorAll('.cat-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.textContent === (cat || 'All categories'));
+  });
+  applyFilters();
+});
+document.getElementById('statusFilter').addEventListener('change', applyFilters);
+
+loadGrants();
+</script>
+</body>
+</html>
