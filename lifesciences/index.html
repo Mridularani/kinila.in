@@ -454,6 +454,23 @@ footer p.copy{font-size:.72rem;color:rgba(255,255,255,.2)}
 
 <div class="section-divider"></div>
 
+<!-- ABOUT -->
+<section style="padding:5rem 6vw;background:var(--warm)" id="about">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px">
+    <div>
+      <div class="section-label">About</div>
+      <h2 class="section-heading">The person behind the practice</h2>
+    </div>
+    <div>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1rem">Scientist and strategist with a PhD in Biochemistry/Molecular Biology and 18+ years across diagnostics, vaccines, digital health, and global health systems. Most of that work has been at the intersection of research and practice — translating evidence into tools and interventions that work in real settings, particularly in low- and middle-income countries.</p>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1rem">Alongside the scientific work, a long-standing interest in behavioural science informs how I approach intervention design — from antimicrobial stewardship to nutrition programmes to community health tools.</p>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300">Kinila Life Sciences brings this experience to research institutions, biotech and pharma organisations, and global health initiatives that need strategic, evidence-driven support.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- VENTURE -->
 <section class="venture" id="venture">
   <div class="venture-inner">
@@ -577,25 +594,17 @@ document.getElementById('enqForm').addEventListener('submit', async e => {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        access_key: 'dd04c930-4954-46fb-b6c5-0223fabe18ba',
+        access_key: 'YOUR_ACCESS_KEY',
         subject: 'New Kinila Life Sciences enquiry',
         from_name: 'Kinila Life Sciences',
-        name: name,
-        email: email,
-        organisation: org,
+        name, organisation: org, email,
         area: e.target.enq_area.value,
         message: e.target.enq_message.value
       })
     });
   } catch(err) {}
-  document.getElementById('enqSuccess').style.cssText = 'display:block;text-align:center;padding:2rem';
-  setTimeout(() => {
-    document.getElementById('enqSuccess').style.display = 'none';
-    document.getElementById('enqForm').style.display = 'block';
-    document.getElementById('enqForm').reset();
-    btn.textContent = 'Send enquiry';
-    btn.style.pointerEvents = 'auto';
-  }, 4000);
+  document.getElementById('enqForm').style.display = 'none';
+  document.getElementById('enqSuccess').style.display = 'block';
 });
 </script>
 
