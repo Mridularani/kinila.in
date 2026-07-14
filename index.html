@@ -3,495 +3,610 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kinila — Knowledge, Care & Community</title>
-<meta name="description" content="Kinila Ventures is a partnership firm based in Udupi, Karnataka, working at the intersection of community health, life sciences, and knowledge.">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<title>Kinila Life Sciences — Healthcare Innovation Consulting</title>
+<meta name="description" content="Strategic consulting for biotech, pharma, and healthcare organisations. 18+ years of experience across regulatory affairs, clinical development, real-world data, and global health partnerships.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --teal:        #0D9488;
-    --teal-dark:   #0a7870;
-    --teal-deeper: #075f5a;
-    --teal-pale:   #e6f7f6;
-    --teal-mid:    #99f6e4;
-    --amber:       #d97706;
-    --amber-pale:  #fef3c7;
-    --amber-mid:   #fcd34d;
-    --sage:        #4d7c5f;
-    --sage-pale:   #ecf5f0;
-    --ink:         #0f1f1e;
-    --muted:       #587070;
-    --border:      #ddeae9;
-    --white:       #ffffff;
-    --off-white:   #f7fafa;
-    --warm-white:  #fdfaf7;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    background: var(--warm-white);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sage:#2d5a4a;
+  --sage-mid:#3d7a62;
+  --sage-light:#4d9a7a;
+  --sage-pale:#edf5f1;
+  --sage-border:#c5ddd5;
+  --gold:#b5933a;
+  --gold-pale:#faf4e8;
+  --gold-mid:#d4b06a;
+  --ink:#0e1a16;
+  --ink-mid:#1e3028;
+  --muted:#5a7268;
+  --border:#dde8e3;
+  --white:#ffffff;
+  --warm:#fafcfb;
+  --off:#f3f7f5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--warm);-webkit-font-smoothing:antialiased;line-height:1.6}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(253,250,247,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 6vw; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-wordmark { font-weight: 600; font-size: 1rem; color: var(--ink); letter-spacing: -0.01em; }
-  .nav-wordmark span { color: var(--teal); }
-  .nav-links { display: flex; align-items: center; gap: 2rem; }
-  .nav-link { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-  .nav-link:hover { color: var(--teal); }
-  .nav-location {
-    font-size: 0.78rem; color: var(--muted);
-    display: flex; align-items: center; gap: 5px;
-  }
-  .nav-location::before { content: '📍'; font-size: 0.75rem; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,252,251,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 6vw;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-wordmark{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.15rem;color:var(--ink);letter-spacing:0.02em}
+.nav-wordmark span{color:var(--sage-mid)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.875rem;font-weight:400;transition:color .2s;letter-spacing:0.02em}
+.nav-link:hover{color:var(--sage)}
+.btn-enquire{background:var(--sage);color:white;border:none;padding:.5rem 1.25rem;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s;letter-spacing:0.02em}
+.btn-enquire:hover{background:var(--sage-mid)}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    padding: 8rem 6vw 5rem;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; overflow: hidden;
-    background: var(--warm-white);
-  }
-  .hero-bg {
-    position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  }
-  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:0;position:relative;overflow:hidden}
+.hero-left{background:var(--sage);padding:8rem 5vw 5rem 6vw;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-left-bg{position:absolute;inset:0;pointer-events:none}
+.hero-right{background:var(--warm);padding:8rem 6vw 5rem 5vw;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
 
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 0.78rem; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 1.5rem;
-    animation: fadeUp 0.5s ease both;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 24px; height: 2px;
-    background: var(--teal); border-radius: 2px;
-  }
+.hero-tag{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.5rem;animation:fadeUp .5s ease both}
+.hero-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);color:white;line-height:1.08;font-weight:300;margin-bottom:1.5rem;animation:fadeUp .6s .1s ease both}
+.hero-left h1 em{font-style:italic;color:var(--gold-mid)}
+.hero-left p{font-size:.95rem;color:rgba(255,255,255,.72);line-height:1.8;max-width:400px;font-weight:300;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+.hero-stat{display:flex;flex-direction:column}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:white;line-height:1}
+.hero-stat-label{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:3px;letter-spacing:.03em}
 
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
-    color: var(--ink);
-    line-height: 1.08;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  .hero h1 em { font-style: italic; color: var(--teal); }
-  .hero h1 .warm { color: var(--amber); }
+.hero-right-tag{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;animation:fadeUp .6s .15s ease both}
+.hero-right h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);color:var(--ink);line-height:1.15;font-weight:400;margin-bottom:1rem;animation:fadeUp .6s .2s ease both}
+.hero-right p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;font-weight:300;animation:fadeUp .6s .25s ease both}
+.expertise-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;animation:fadeUp .6s .3s ease both}
+.pill{font-size:.75rem;font-weight:400;padding:.35rem .85rem;border-radius:3px;background:var(--sage-pale);color:var(--sage);border:1px solid var(--sage-border);letter-spacing:.02em}
+.btn-primary{background:var(--sage);color:white;border:none;padding:.9rem 2rem;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .2s;letter-spacing:.03em;animation:fadeUp .6s .35s ease both}
+.btn-primary:hover{background:var(--sage-mid);transform:translateY(-1px)}
+.btn-primary svg{width:15px;height:15px}
 
-  .hero-desc {
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    color: var(--muted);
-    max-width: 520px;
-    line-height: 1.75;
-    margin-bottom: 3rem;
-    font-weight: 300;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
+/* DIVIDER */
+.section-divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 6vw}
 
-  .hero-arms {
-    display: flex; gap: 0.75rem; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-  .arm-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    font-size: 0.82rem; font-weight: 500;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1.5px solid transparent;
-  }
-  .arm-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .arm-chip.care { background: var(--teal-pale); color: var(--teal-dark); border-color: var(--teal-mid); }
-  .arm-chip.life { background: var(--sage-pale); color: var(--sage); border-color: #b6d9c3; }
-  .arm-chip.commons { background: var(--amber-pale); color: var(--amber); border-color: var(--amber-mid); }
-  .arm-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+/* OFFERINGS */
+.offerings{padding:5rem 6vw;background:var(--off)}
+.offerings-intro{font-size:.92rem;color:var(--muted);line-height:1.8;max-width:580px;margin-bottom:3rem;font-weight:300;border-left:3px solid var(--sage);padding-left:1.25rem}
+.offerings-grid{display:flex;flex-direction:column;gap:1.5rem}
+.offering-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.75rem;display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start}
+.offering-item:hover{border-color:var(--sage-border)}
+.offering-label{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--sage);line-height:1.3}
+.offering-body p{font-size:.875rem;color:var(--muted);line-height:1.75;font-weight:300}
 
-  /* MISSION BAND */
-  .mission-band {
-    background: var(--teal);
-    padding: 3rem 6vw;
-    display: flex; align-items: center; gap: 3rem;
-    flex-wrap: wrap;
-  }
-  .mission-text {
-    flex: 1; min-width: 260px;
-  }
-  .mission-text h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    color: white; line-height: 1.2; margin-bottom: 0.75rem;
-  }
-  .mission-text h2 em { font-style: italic; color: var(--teal-mid); }
-  .mission-text p { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 440px; }
-  .mission-values {
-    display: flex; flex-direction: column; gap: 0.6rem;
-    flex-shrink: 0;
-  }
-  .value-row {
-    display: flex; align-items: center; gap: 0.6rem;
-    font-size: 0.85rem; color: rgba(255,255,255,0.85);
-  }
-  .value-row::before {
-    content: ''; width: 20px; height: 1.5px;
-    background: var(--teal-mid); border-radius: 2px; flex-shrink: 0;
-  }
+/* ENGAGEMENTS */
+.engagements{padding:5rem 6vw;background:var(--warm)}
+.engagements-note{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:560px;margin-bottom:2.5rem;font-style:italic}
+.engagement-list{display:flex;flex-direction:column;gap:1rem}
+.engagement-card{border:1px solid var(--border);border-radius:10px;padding:1.5rem;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;background:var(--white)}
+.engagement-card:hover{border-color:var(--sage-border)}
+.engagement-info h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.engagement-info p{font-size:.83rem;color:var(--muted);line-height:1.65;font-weight:300;max-width:560px}
+.status-tag{display:inline-flex;align-items:center;gap:5px;padding:.3rem .8rem;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.status-development{background:#fef3c7;color:#92400e}
+.status-ongoing{background:var(--sage-pale);color:var(--sage)}
+.status-completed{background:#d1fae5;color:#065f46}
 
-  /* ARMS SECTION */
-  .arms { padding: 5rem 6vw; background: var(--warm-white); }
-  .section-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
-  h2.section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--ink); line-height: 1.15; margin-bottom: 0.75rem; }
-  .section-sub { color: var(--muted); font-size: 1rem; max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
+/* EXPERTISE */
+.expertise{padding:5rem 6vw;background:var(--warm)}
+.section-label{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:.75rem}
+h2.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--ink);line-height:1.15;font-weight:400;margin-bottom:.75rem}
+.section-sub{color:var(--muted);font-size:.92rem;max-width:500px;line-height:1.75;margin-bottom:3rem;font-weight:300}
 
-  .arms-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+.expertise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.expertise-card{background:var(--white);padding:2rem;transition:background .2s}
+.expertise-card:hover{background:var(--sage-pale)}
+.exp-icon{width:36px;height:36px;background:var(--sage-pale);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;font-size:.9rem}
+.expertise-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;line-height:1.2}
+.expertise-card p{font-size:.83rem;color:var(--muted);line-height:1.65;font-weight:300}
+.expertise-card ul{list-style:none;margin-top:.75rem}
+.expertise-card ul li{font-size:.8rem;color:var(--muted);padding:.2rem 0;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.expertise-card ul li::before{content:'—';color:var(--sage-border);flex-shrink:0;margin-top:1px}
 
-  .arm-card {
-    border-radius: 18px;
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.25s, box-shadow 0.25s;
-    border: 1.5px solid transparent;
-    position: relative;
-    overflow: hidden;
-  }
-  .arm-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    border-radius: 4px 0 0 4px;
-  }
-  .arm-card:hover { transform: translateX(6px); box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+/* APPROACH */
+.approach{padding:5rem 6vw;background:var(--off)}
+.approach-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.approach-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--ink);font-weight:400;line-height:1.15;margin-bottom:1rem}
+.approach-text p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1rem;font-weight:300}
+.approach-principles{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.principle{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:var(--white);border:1px solid var(--border);border-radius:8px;border-left:3px solid var(--sage)}
+.principle-num{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--sage);flex-shrink:0;line-height:1.3}
+.principle-text h4{font-size:.88rem;font-weight:500;color:var(--ink);margin-bottom:.2rem}
+.principle-text p{font-size:.8rem;color:var(--muted);line-height:1.55;font-weight:300}
 
-  .arm-card.care-card { background: var(--teal-pale); border-color: #b2d8d8; }
-  .arm-card.care-card::before { background: var(--teal); }
-  .arm-card.life-card { background: var(--sage-pale); border-color: #b6d9c3; }
-  .arm-card.life-card::before { background: var(--sage); }
-  .arm-card.commons-card { background: var(--amber-pale); border-color: #fcd34d; }
-  .arm-card.commons-card::before { background: var(--amber); }
-  .arm-card.coming { opacity: 0.65; pointer-events: none; }
+/* VENTURE */
+.venture{padding:5rem 6vw;background:var(--ink)}
+.venture-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.venture-label{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sage-light);margin-bottom:.75rem}
+.venture h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:white;font-weight:300;line-height:1.15;margin-bottom:1rem}
+.venture h2 em{font-style:italic;color:var(--gold-mid)}
+.venture p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:1rem;font-weight:300}
+.venture-quote{border-left:2px solid var(--sage-light);padding:.75rem 0 .75rem 1.25rem;margin:1.5rem 0}
+.venture-quote p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.85);line-height:1.6;font-weight:300;margin:0}
+.venture-link{display:inline-flex;align-items:center;gap:6px;color:var(--sage-light);text-decoration:none;font-size:.85rem;font-weight:400;border-bottom:1px solid rgba(77,154,122,.3);padding-bottom:1px;transition:border-color .2s}
+.venture-link:hover{border-color:var(--sage-light)}
+.venture-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:2rem}
+.venture-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:white;margin-bottom:.75rem}
+.venture-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.v-stat{display:flex;flex-direction:column;padding:1rem;background:rgba(255,255,255,.04);border-radius:8px}
+.v-stat-num{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--sage-light);line-height:1}
+.v-stat-label{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:3px}
 
-  .arm-label {
-    font-size: 0.7rem; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-  .care-card .arm-label { color: var(--teal); }
-  .life-card .arm-label { color: var(--sage); }
-  .commons-card .arm-label { color: var(--amber); }
+/* ENQUIRY */
+.enquiry{padding:5rem 6vw;background:var(--warm)}
+.enquiry-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.enquiry-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--ink);font-weight:400;line-height:1.15;margin-bottom:1rem}
+.enquiry-text p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1rem;font-weight:300}
+.enquiry-detail{display:flex;align-items:center;gap:.75rem;margin-top:.5rem;font-size:.85rem;color:var(--muted)}
+.enquiry-detail svg{width:16px;height:16px;stroke:var(--sage);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-  .arm-card h3 { font-size: 1.25rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
-  .arm-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+.enq-form{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2.5rem}
+.enq-form h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.enq-form>p{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+.form-field{display:flex;flex-direction:column;gap:4px;margin-bottom:1rem}
+.form-field label{font-size:.75rem;font-weight:500;color:var(--ink);letter-spacing:.03em}
+.form-field input,.form-field select,.form-field textarea{border:1.5px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.875rem;color:var(--ink);background:var(--warm);outline:none;transition:border-color .2s;padding:10px 12px}
+.form-field select{appearance:none;-webkit-appearance:none;background:var(--warm) url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a7268' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center;padding-right:28px;cursor:pointer}
+.form-field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--sage)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.enq-submit{width:100%;height:46px;background:var(--sage);color:white;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .2s;letter-spacing:.03em;margin-top:.5rem}
+.enq-submit:hover{background:var(--sage-mid)}
+.enq-success{display:none;text-align:center;padding:2rem}
+.enq-success h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--ink);margin-bottom:.5rem}
+.enq-success p{font-size:.85rem;color:var(--muted);font-weight:300}
 
-  .arm-tag {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.75rem; font-weight: 500;
-    padding: 0.25rem 0.75rem;
-    border-radius: 100px;
-  }
-  .care-card .arm-tag { background: rgba(13,148,136,0.12); color: var(--teal-dark); }
-  .life-card .arm-tag { background: rgba(77,124,95,0.12); color: var(--sage); }
-  .commons-card .arm-tag { background: rgba(217,119,6,0.12); color: var(--amber); }
+/* FOOTER */
+footer{background:var(--ink-mid);padding:2rem 6vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,.06)}
+.footer-wordmark{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.02em}
+.footer-wordmark span{color:var(--sage-light)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.78rem;transition:color .2s}
+.footer-links a:hover{color:var(--sage-light)}
+footer p.copy{font-size:.72rem;color:rgba(255,255,255,.2)}
 
-  .arm-arrow {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  .arm-card:hover .arm-arrow { transform: translateX(4px); }
-  .care-card .arm-arrow { background: var(--teal); color: white; }
-  .life-card .arm-arrow { background: var(--sage); color: white; }
-  .commons-card .arm-arrow { background: var(--amber); color: white; }
-  .arm-arrow svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-  .coming-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
-    text-transform: uppercase;
-    background: rgba(0,0,0,0.06);
-    color: var(--muted);
-    padding: 0.3rem 0.8rem;
-    border-radius: 100px;
-  }
-
-  /* WHERE WE WORK */
-  .location { padding: 5rem 6vw; background: var(--off-white); }
-  .location-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 3rem; align-items: center;
-  }
-  .location-text h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
-  .location-text p { font-size: 0.92rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
-  .location-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-  .loc-tag {
-    font-size: 0.78rem; font-weight: 500;
-    padding: 0.3rem 0.8rem; border-radius: 100px;
-    background: var(--teal-pale); color: var(--teal-dark);
-    border: 1px solid var(--border);
-  }
-  .location-visual {
-    background: var(--teal-pale);
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    padding: 2rem;
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-  .loc-stat { display: flex; flex-direction: column; }
-  .loc-stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); line-height: 1; }
-  .loc-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
-  .loc-divider { height: 1px; background: var(--border); }
-
-  /* CONTACT */
-  .contact { padding: 5rem 6vw; background: var(--warm-white); }
-  .contact-inner {
-    background: var(--teal);
-    border-radius: 20px;
-    padding: 3.5rem;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 3rem; align-items: center;
-  }
-  .contact-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: white; line-height: 1.2; margin-bottom: 0.75rem; }
-  .contact-inner p { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px; padding: 1rem 1.25rem;
-    text-decoration: none; transition: background 0.2s;
-    gap: 1rem;
-  }
-  .contact-link:hover { background: rgba(255,255,255,0.18); }
-  .contact-link h4 { font-size: 0.92rem; font-weight: 600; color: white; margin-bottom: 0.1rem; }
-  .contact-link p { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin: 0; }
-  .contact-link .arrow { color: var(--teal-mid); font-size: 1.1rem; flex-shrink: 0; }
-
-  /* FOOTER */
-  footer {
-    background: var(--ink); padding: 2rem 6vw;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-logo { display: flex; align-items: center; gap: 8px; }
-  .footer-wordmark { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.5); }
-  .footer-wordmark span { color: var(--teal-mid); }
-  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.78rem; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--teal-mid); }
-  footer p.copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-  @media (max-width: 768px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .mission-band { padding: 2.5rem 1.5rem; gap: 2rem; }
-    .arms, .location, .contact { padding: 3.5rem 1.5rem; }
-    .location-inner, .contact-inner { grid-template-columns: 1fr; }
-    .contact-inner { padding: 2rem; }
-    .arm-card { grid-template-columns: 1fr; gap: 1rem; }
-    footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
-  }
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{border-left:none;border-top:1px solid var(--border)}
+  .expertise-grid{grid-template-columns:1fr 1fr}
+  .approach-inner,.venture-inner,.enquiry-inner{grid-template-columns:1fr}
+  .offering-item{grid-template-columns:1fr}
+  .engagement-card{flex-direction:column;gap:.75rem}
+}
+@media(max-width:600px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hero-left,.hero-right{padding:5rem 1.5rem 3rem}
+  .expertise,.approach,.venture,.enquiry{padding:3rem 1.5rem}
+  .expertise-grid{grid-template-columns:1fr}
+  footer{padding:1.5rem;flex-direction:column;align-items:flex-start}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">
-    <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-      <rect width="512" height="512" rx="114" fill="#0D9488"/>
+  <a href="/lifesciences" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="114" fill="#2d5a4a"/>
       <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
       <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
       <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
-      <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
+      <circle cx="358" cy="170" r="28" fill="#4d9a7a"/>
       <circle cx="358" cy="170" r="16" fill="white"/>
     </svg>
-    <span class="nav-wordmark">Kinila <span>Ventures</span></span>
+    <span class="nav-wordmark">Kinila <span>Life Sciences</span></span>
   </a>
   <div class="nav-links">
-    <a href="#arms" class="nav-link">Our work</a>
-    <a href="#location" class="nav-link">Where we work</a>
-    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#expertise" class="nav-link">Expertise</a>
+    <a href="#offerings" class="nav-link">Services</a>
+    <a href="/lifesciences/grant-strategy" class="nav-link" style="color:var(--sage);font-weight:500">Grant Strategy ↗</a>
+    <a href="#engagements" class="nav-link">Engagements</a>
+    <a href="#approach" class="nav-link">Approach</a>
+    <a href="#venture" class="nav-link">AI Health</a>
+    <a href="#enquiry" class="nav-link">Enquire</a>
+    <a href="#enquiry" class="btn-enquire">Send enquiry</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <svg class="hero-bg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="1100" cy="80" r="320" fill="#e6f7f6" opacity="0.6"/>
-    <circle cx="1050" cy="650" r="180" fill="#fef3c7" opacity="0.5"/>
-    <circle cx="80" cy="580" r="200" fill="#ecf5f0" opacity="0.5"/>
-    <circle cx="200" cy="100" r="120" fill="#e6f7f6" opacity="0.4"/>
-  </svg>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Kinila Ventures</div>
-    <h1>Making <em>science and knowledge</em> accessible to those who need it most</h1>
-    <p class="hero-desc">We are a partnership firm working at the intersection of community health, life sciences, and knowledge. Everything we build asks the same question: how do we get the right knowledge to the right people, at the right moment?</p>
-    <div class="hero-arms">
-      <a href="/care" class="arm-chip care"><span class="dot"></span>Kinila AI Health</a>
-      <a href="/lifesciences" class="arm-chip life"><span class="dot"></span>Kinila Life Sciences</a>
-      <a href="/commons" class="arm-chip commons"><span class="dot"></span>Kinila Commons</a>
+<div class="hero">
+  <div class="hero-left">
+    <svg class="hero-left-bg" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="500" cy="150" r="300" fill="#265040" opacity=".6"/>
+      <circle cx="50" cy="800" r="250" fill="#265040" opacity=".4"/>
+      <circle cx="550" cy="700" r="150" fill="#3d7a62" opacity=".2"/>
+    </svg>
+    <div class="hero-tag">Kinila Life Sciences · Healthcare Consulting</div>
+    <h1>Science that reaches the people who <em>need it most</em></h1>
+    <p>Strategic consulting for biotech, pharma, and healthcare organisations navigating research, regulatory, and clinical development — from India to the world.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num">18+</span><span class="hero-stat-label">Years experience</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">$15M+</span><span class="hero-stat-label">Project portfolio</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">10K+</span><span class="hero-stat-label">Patients impacted</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">60+</span><span class="hero-stat-label">Countries</span></div>
     </div>
   </div>
-</section>
 
-<!-- MISSION BAND -->
-<div class="mission-band">
-  <div class="mission-text">
-    <h2>One idea, <em>three expressions</em></h2>
-    <p>Knowledge locked away — in journals, in specialist offices, in clinical training — doesn't reach the people who need it most. Kinila exists to close that gap: bringing scientific knowledge to organisations navigating complex decisions, clinical knowledge to health workers at the point of care, and community knowledge to everyone.</p>
-  </div>
-  <div class="mission-values">
-    <div class="value-row">Accessible by design</div>
-    <div class="value-row">Evidence-driven</div>
-    <div class="value-row">Community first</div>
-    <div class="value-row">Built for the long term</div>
+  <div class="hero-right">
+    <div class="hero-right-tag">About</div>
+    <h2>Healthcare Innovation Leader & Systems Strategist</h2>
+    <p>18+ years bridging science, healthcare delivery, and global partnerships. Skilled at leading complex, multi-stakeholder initiatives across diagnostics, vaccines, real-world data, and healthcare technology — with a proven record of translating evidence into sustainable healthcare practices.</p>
+    <div class="expertise-pills">
+      <span class="pill">Regulatory affairs</span>
+      <span class="pill">Clinical development</span>
+      <span class="pill">Real-world data</span>
+      <span class="pill">Diagnostics</span>
+      <span class="pill">Global health</span>
+      <span class="pill">FDA · EMA · ICMR</span>
+      <span class="pill">Healthcare AI</span>
+    </div>
+    <a href="#enquiry" class="btn-primary">
+      Send an enquiry
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </div>
 
-<!-- ARMS -->
-<section class="arms" id="arms">
-  <div class="section-tag">What we do</div>
-  <h2 class="section-title">Three arms, one purpose</h2>
-  <p class="section-sub">Each arm makes knowledge accessible to a different group of people who need it — health workers, scientific organisations, and the wider community.</p>
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="section-label">Core expertise</div>
+  <h2 class="section-heading">What we bring to your organisation</h2>
+  <p class="section-sub">Deep domain expertise across the full spectrum of healthcare innovation — from bench to market, from India to global.</p>
 
-  <div class="arms-stack">
-
-    <!-- AI Health -->
-    <a href="/care" class="arm-card care-card">
-      <div>
-        <div class="arm-label">Kinila AI Health</div>
-        <h3>Clinical knowledge at the point of care</h3>
-        <p>Community health workers carry enormous responsibility but rarely have specialist knowledge on hand. Kinila AI Health puts AI-assisted triage guidance in their hands — structured, validated, and plain-language — so the right clinical knowledge reaches the right person at the right moment.</p>
-        <span class="arm-tag">Validated · Early deployment · Karnataka</span>
-      </div>
-      <div class="arm-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
-    <!-- Life Sciences -->
-    <div class="arm-card life-card coming">
-      <div>
-        <div class="arm-label">Kinila Life Sciences</div>
-        <h3>Scientific expertise where it is needed</h3>
-        <p>Biotech and pharmaceutical organisations often need deep domain knowledge at critical decision points — research design, regulatory navigation, clinical development. Kinila Life Sciences makes that expertise accessible to organisations that need it, without the overhead of a large consultancy.</p>
-        <span class="arm-tag">Consultation · Life sciences · Regulatory</span>
-      </div>
-      <span class="coming-badge">Coming soon</span>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="exp-icon">🔬</div>
+      <h3>Regulatory & Compliance</h3>
+      <p>100% regulatory approval success rate across multiple markets and submission types.</p>
+      <ul>
+        <li>FDA, EMA, ICMR submissions</li>
+        <li>ISO 15189:2012 quality management</li>
+        <li>Global regulatory strategy</li>
+        <li>Compliance across markets</li>
+      </ul>
     </div>
-
-    <!-- Commons -->
-    <div class="arm-card commons-card coming">
-      <div>
-        <div class="arm-label">Kinila Commons</div>
-        <h3>Knowledge as a shared resource</h3>
-        <p>A library is the oldest and most democratic knowledge institution there is. Kinila Commons will be a shared space for reading, learning, and civic engagement in Udupi — built on the belief that knowledge belongs to the community, not just those who can afford access to it.</p>
-        <span class="arm-tag">Community · Knowledge · Udupi</span>
-      </div>
-      <span class="coming-badge">Coming soon</span>
+    <div class="expertise-card">
+      <div class="exp-icon">🧬</div>
+      <h3>Biotechnology & R&D</h3>
+      <p>18+ years in antibody engineering, diagnostic development, and point-of-care technology.</p>
+      <ul>
+        <li>Antibody engineering & phage display</li>
+        <li>Diagnostic development & validation</li>
+        <li>NGS-based assays & metagenomics</li>
+        <li>Point-of-care technology for LMICs</li>
+      </ul>
     </div>
-
+    <div class="expertise-card">
+      <div class="exp-icon">📊</div>
+      <h3>Real-World Data & Analytics</h3>
+      <p>Led teams analysing 500TB+ healthcare datasets to generate evidence for decision-making.</p>
+      <ul>
+        <li>Real-world data analytics</li>
+        <li>Clinical trial data analysis</li>
+        <li>Statistical modelling & outcomes</li>
+        <li>Evidence generation for decisions</li>
+      </ul>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-icon">🏥</div>
+      <h3>Healthcare Systems</h3>
+      <p>Large-scale improvement project design across diverse healthcare environments globally.</p>
+      <ul>
+        <li>Healthcare delivery optimisation</li>
+        <li>Quality systems & patient safety</li>
+        <li>Evidence-to-practice translation</li>
+        <li>Systems-level thinking & analysis</li>
+      </ul>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-icon">🌍</div>
+      <h3>Global Health & Partnerships</h3>
+      <p>Cross-cultural collaboration informed by work across 60+ countries and diverse stakeholder environments.</p>
+      <ul>
+        <li>Government & NGO partnerships</li>
+        <li>Multi-stakeholder initiatives</li>
+        <li>Healthcare policy navigation</li>
+        <li>Resource-constrained environments</li>
+      </ul>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-icon">⚕️</div>
+      <h3>Healthcare Technology</h3>
+      <p>End-to-end development, validation, and scaling of diagnostic innovations for underserved populations.</p>
+      <ul>
+        <li>LMIC-validated technology</li>
+        <li>Scaling diagnostic innovations</li>
+        <li>Clinical partnerships</li>
+        <li>AI health platform development</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<!-- WHERE WE WORK -->
-<section class="location" id="location">
-  <div class="location-inner" style="grid-template-columns: 1fr;">
-    <div class="location-text">
-      <div class="section-tag">Where we work</div>
-      <h2>Rooted in coastal Karnataka, working across the world</h2>
-      <p>Kinila Ventures is based in coastal Karnataka — a region with a strong tradition of community life, healthcare, and education that shapes everything we do. Our community library and AI health tool serve this region directly.</p>
-      <p>Our life sciences consultation practice works with biotech and pharmaceutical organisations globally — bringing the same commitment to accessible, evidence-driven knowledge to clients wherever they are.</p>
-      <div class="location-tags">
-        <span class="loc-tag">Coastal Karnataka</span>
-        <span class="loc-tag">Primary health centres</span>
-        <span class="loc-tag">Community settings</span>
-        <span class="loc-tag">India</span>
-        <span class="loc-tag">Global</span>
+<div class="section-divider"></div>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="approach-inner">
+    <div class="approach-text">
+      <div class="section-label">How we work</div>
+      <h2 class="section-heading">Innovations only matter when they improve real lives</h2>
+      <p>This is the belief that drives every engagement. Kinila Life Sciences brings together deep scientific expertise and a systems-level understanding of healthcare delivery — with the conviction that knowledge must translate into practice to have any value.</p>
+      <p>We work with biotech, pharma, and healthcare organisations that want rigorous thinking, honest counsel, and a partner who understands both the science and the system it operates within.</p>
+    </div>
+    <div class="approach-principles">
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <div class="principle-text">
+          <h4>Evidence first</h4>
+          <p>Every recommendation is grounded in data, literature, and real-world experience — not generic frameworks.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <div class="principle-text">
+          <h4>Systems thinking</h4>
+          <p>We look beyond the immediate problem to understand the system it sits in — regulatory, clinical, organisational, and cultural.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <div class="principle-text">
+          <h4>Equity by design</h4>
+          <p>Solutions that only work for well-resourced settings are incomplete. We design with underserved populations in mind from the start.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <div class="principle-text">
+          <h4>Translational focus</h4>
+          <p>From research to regulatory submission to real-world implementation — we stay with the work until it lands in practice.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
+<!-- OFFERINGS -->
+<section class="offerings" id="offerings">
+  <div class="section-label">What we offer</div>
+  <h2 class="section-heading">Services & consulting areas</h2>
+  <p class="offerings-intro">Research institutions are built to generate knowledge — not to navigate funding ecosystems. Kinila Life Sciences bridges that gap, offering hands-on support across the full arc from strategy to submission to implementation.</p>
+
+  <div class="offerings-grid">
+    <div class="offering-item">
+      <div class="offering-label">Grant writing & proposal development</div>
+      <div class="offering-body">
+        <p>Securing funding requires a different skill set from doing the science. We work with academic and research partners to develop compelling, well-structured grant proposals — from funder identification and narrative strategy to completing online applications, budget justification, and submission compliance. We take the administrative burden off researchers so they can focus on the work.</p>
+        <a href="/lifesciences/grant-strategy" style="display:inline-flex;align-items:center;gap:6px;margin-top:.75rem;font-size:.82rem;font-weight:500;color:var(--sage);text-decoration:none;border-bottom:1px solid var(--sage-border);padding-bottom:1px">Learn more about grant strategy →</a>
+      </div>
+    </div>
+    <div class="offering-item">
+      <div class="offering-label">Research strategy & implementation</div>
+      <div class="offering-body">
+        <p>Translating research into practice — whether a clinical intervention, a community health programme, or a technology deployment — requires planning that most research teams are not resourced to do. We contribute to implementation design, stakeholder alignment, and evaluation frameworks from the earliest stages of a project.</p>
+      </div>
+    </div>
+    <div class="offering-item">
+      <div class="offering-label">Academic & industry partnerships</div>
+      <div class="offering-body">
+        <p>We connect research institutions with industry partners, NGOs, healthcare systems, and funders through our networks across global health, biotechnology, and healthcare innovation. Whether you are looking for a co-investigator, an industry collaborator, or a delivery partner, we help build the right table.</p>
+      </div>
+    </div>
+    <div class="offering-item">
+      <div class="offering-label">Regulatory & clinical development</div>
+      <div class="offering-body">
+        <p>Strategic guidance on regulatory submissions (FDA, EMA, ICMR), clinical trial design, diagnostic development, and navigating complex multi-stakeholder approval processes across India and internationally.</p>
+      </div>
+    </div>
+    <div class="offering-item">
+      <div class="offering-label">Real-world data & evidence generation</div>
+      <div class="offering-body">
+        <p>From study design to analysis, we support evidence generation from real-world healthcare data — including outcomes research, post-market studies, and data strategies for grant applications and regulatory submissions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ENGAGEMENTS -->
+<section class="engagements" id="engagements">
+  <div class="section-label">Current engagements</div>
+  <h2 class="section-heading">Where we are working</h2>
+  <p class="engagements-note">Kinila Life Sciences maintains an active portfolio of research collaborations, grant proposals, and consulting engagements across global health, healthcare AI, and biotechnology. Details of individual projects are shared selectively given the confidential nature of proposals in development.</p>
+
+  <div class="engagement-list">
+    <div class="engagement-card">
+      <div class="engagement-info">
+        <h4>Antimicrobial resistance & precision stewardship</h4>
+        <p>Collaborating with a South Indian university on a global health research grant proposal focused on antimicrobial resistance and precision stewardship. Contributing to research design, AI platform strategy, and behavioural science components.</p>
+      </div>
+      <span class="status-tag status-development">In development</span>
+    </div>
+    <div class="engagement-card">
+      <div class="engagement-info">
+        <h4>AI in health — evaluation & implementation</h4>
+        <p>Designed and developed an AI-based clinical decision support tool for community health workers, validated through a structured clinical study. A funding proposal for formal evaluation and implementation is currently under review.</p>
+      </div>
+      <span class="status-tag status-development">In development</span>
+    </div>
+    <div class="engagement-card">
+      <div class="engagement-info">
+        <h4>Microbial & enzyme-based wastewater treatment</h4>
+        <p>Contributing to research strategy, innovation framing, and partnership development for a microbial and enzyme-based wastewater treatment platform. Working with an industry partner on positioning and next steps.</p>
+      </div>
+      <span class="status-tag status-ongoing">Ongoing</span>
+    </div>
+    <div class="engagement-card">
+      <div class="engagement-info">
+        <h4>Behavioural science in community health</h4>
+        <p>Contributed to the design and implementation of a community-based behavioural intervention focused on nutrition in rural Maharashtra, in partnership with a non-profit organisation. Involved in intervention strategy, design, and field implementation over a one-year period. The programme showed positive outcomes during the period of involvement.</p>
+      </div>
+      <span class="status-tag status-completed">Completed</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section style="padding:5rem 6vw;background:var(--warm)" id="about">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px">
     <div>
-      <h2>Get in touch with Kinila</h2>
-      <p>Whether you are a health worker, a researcher, a funder, or someone in the community — we would like to hear from you. Kinila is a small, approachable organisation and we respond to every message.</p>
+      <div class="section-label">About</div>
+      <h2 class="section-heading">The person behind the practice</h2>
     </div>
-    <div class="contact-links">
-      <a href="mailto:kinila.care@gmail.com" class="contact-link">
-        <div>
-          <h4>Write to us</h4>
-          <p>kinila.care@gmail.com · We respond within 2 working days</p>
+    <div>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1rem">Scientist and strategist with a PhD in Biochemistry/Molecular Biology and 18+ years across diagnostics, vaccines, digital health, and global health systems. Most of that work has been at the intersection of research and practice — translating evidence into tools and interventions that work in real settings, particularly in low- and middle-income countries.</p>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1rem">Alongside the scientific work, a long-standing interest in behavioural science informs how I approach intervention design — from antimicrobial stewardship to nutrition programmes to community health tools.</p>
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.85;font-weight:300">Kinila Life Sciences brings this experience to research institutions, biotech and pharma organisations, and global health initiatives that need strategic, evidence-driven support.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- VENTURE -->
+<section class="venture" id="venture">
+  <div class="venture-inner">
+    <div>
+      <div class="venture-label">Venture in progress</div>
+      <h2>Building <em>AI healthcare</em> for the last mile</h2>
+      <p>The consulting practice is only one part of the work. Kinila is also building an AI health platform designed for the 3.5 billion people who lack access to basic healthcare — starting with the clinical decision support tool already deployed in coastal Karnataka.</p>
+      <p>Unlike existing solutions designed for hospitals, our tools work on smartphones in low-resource settings, designed for community health workers at the front line of care.</p>
+      <div class="venture-quote">
+        <p>"We're not bringing urban healthcare to rural areas — we're building rural healthcare for rural realities."</p>
+      </div>
+      <a href="/care" class="venture-link">Learn about Kinila AI Health →</a>
+    </div>
+    <div class="venture-card">
+      <h4>Kinila AI Health — validation results</h4>
+      <div class="venture-stats">
+        <div class="v-stat"><span class="v-stat-num">97.1%</span><span class="v-stat-label">Emergency detection sensitivity</span></div>
+        <div class="v-stat"><span class="v-stat-num">99%</span><span class="v-stat-label">Safe output rate</span></div>
+        <div class="v-stat"><span class="v-stat-num">81%</span><span class="v-stat-label">Overall triage accuracy</span></div>
+        <div class="v-stat"><span class="v-stat-num">0.81</span><span class="v-stat-label">Weighted Kappa agreement</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section class="enquiry" id="enquiry">
+  <div class="enquiry-inner">
+    <div class="enquiry-text">
+      <div class="section-label">Get in touch</div>
+      <h2 class="section-heading">Let's talk about your project</h2>
+      <p>Whether you are a biotech startup navigating your first regulatory submission, a pharma organisation looking at market access in India, or a healthcare system trying to translate evidence into practice — we would like to hear from you.</p>
+      <p>Send a brief description of what you are working on and we will respond within 2 working days.</p>
+      <div class="enquiry-detail">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        kinila.care@gmail.com
+      </div>
+      <div class="enquiry-detail">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Response within 2 working days
+      </div>
+      <div class="enquiry-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Bangalore & Udupi, India · Global
+      </div>
+    </div>
+
+    <div class="enq-form" id="enqFormWrap">
+      <h3>Send an enquiry</h3>
+      <p>Tell us a little about your project and what kind of support you are looking for.</p>
+      <form id="enqForm" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name *</label>
+            <input type="text" name="enq_name" placeholder="Your name" required>
+          </div>
+          <div class="form-field">
+            <label>Organisation *</label>
+            <input type="text" name="enq_org" placeholder="Company / institution" required>
+          </div>
         </div>
-        <span class="arrow">→</span>
-      </a>
-      <a href="/care" class="contact-link">
-        <div>
-          <h4>Kinila AI Health</h4>
-          <p>Learn about the clinical decision support tool</p>
+        <div class="form-field">
+          <label>Email *</label>
+          <input type="email" name="enq_email" placeholder="your@email.com" required>
         </div>
-        <span class="arrow">→</span>
-      </a>
-      <a href="https://kinilaventures.com" class="contact-link">
-        <div>
-          <h4>Kinila Ventures</h4>
-          <p>The formal home of the partnership firm</p>
+        <div class="form-field">
+          <label>Area of interest</label>
+          <select name="enq_area">
+            <option value="" disabled selected>Select</option>
+            <option>Grant strategy & proposal development</option>
+            <option>Regulatory affairs & submissions</option>
+            <option>Clinical development & trial design</option>
+            <option>Research strategy & scientific writing</option>
+            <option>Real-world data & analytics</option>
+            <option>Market access & commercialisation</option>
+            <option>Healthcare systems & improvement</option>
+            <option>AI & healthcare technology</option>
+            <option>Global health partnerships</option>
+            <option>Other / not sure yet</option>
+          </select>
         </div>
-        <span class="arrow">→</span>
-      </a>
+        <div class="form-field">
+          <label>Tell us about your project</label>
+          <textarea name="enq_message" placeholder="Brief description of what you are working on and the kind of support you are looking for…"></textarea>
+        </div>
+        <button type="submit" class="enq-submit">Send enquiry</button>
+      </form>
+      <div class="enq-success" id="enqSuccess">
+        <div style="font-size:2rem;margin-bottom:.75rem">✉️</div>
+        <h4>Thank you for reaching out</h4>
+        <p>We have received your enquiry and will be in touch within 2 working days.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">
-    <svg width="28" height="28" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-      <rect width="512" height="512" rx="114" fill="#0D9488"/>
-      <rect x="138" y="118" width="50" height="276" rx="14" fill="white"/>
-      <polygon points="188,224 330,118 376,118 240,230" fill="white"/>
-      <polygon points="188,280 330,394 376,394 240,270" fill="white"/>
-      <circle cx="358" cy="170" r="28" fill="#99F6E4"/>
-      <circle cx="358" cy="170" r="16" fill="white"/>
-    </svg>
-    <span class="footer-wordmark">Kinila <span>Ventures</span></span>
-  </div>
+  <span class="footer-wordmark">Kinila <span>Life Sciences</span> · A Kinila Ventures practice</span>
   <div class="footer-links">
+    <a href="/">Kinila Ventures</a>
     <a href="/care">AI Health</a>
-    <a href="/lifesciences">Life Sciences</a>
     <a href="/commons">Commons</a>
-    <a href="https://kinilaventures.com">Kinila Ventures</a>
     <a href="mailto:kinila.care@gmail.com">Contact</a>
   </div>
-  <p class="copy">© 2026 Kinila Ventures · Udupi, Karnataka, India</p>
+  <p class="copy">© 2026 Kinila Ventures · Udupi & Bangalore, India</p>
 </footer>
+
+<script>
+document.getElementById('enqForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const name = e.target.enq_name.value.trim();
+  const org = e.target.enq_org.value.trim();
+  const email = e.target.enq_email.value.trim();
+  if (!name || !org || !email) return;
+  const btn = e.target.querySelector('.enq-submit');
+  btn.textContent = 'Sending…';
+  btn.style.pointerEvents = 'none';
+  try {
+    await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        access_key: 'YOUR_ACCESS_KEY',
+        subject: 'New Kinila Life Sciences enquiry',
+        from_name: 'Kinila Life Sciences',
+        name, organisation: org, email,
+        area: e.target.enq_area.value,
+        message: e.target.enq_message.value
+      })
+    });
+  } catch(err) {}
+  document.getElementById('enqForm').style.display = 'none';
+  document.getElementById('enqSuccess').style.display = 'block';
+});
+</script>
 
 </body>
 </html>
