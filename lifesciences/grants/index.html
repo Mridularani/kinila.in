@@ -56,7 +56,7 @@ h1 em{font-style:italic;color:#99f6e4}
 .main{padding:2rem 6vw 5rem;max-width:1200px}
 
 /* GRANT TABLE */
-.grant-table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:2rem}
+.grant-table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:2rem;table-layout:fixed}
 .grant-table th:nth-child(1),.grant-table td:nth-child(1){width:26%}
 .grant-table th:nth-child(2),.grant-table td:nth-child(2){width:14%}
 .grant-table th:nth-child(3),.grant-table td:nth-child(3){width:22%}
@@ -65,19 +65,19 @@ h1 em{font-style:italic;color:#99f6e4}
 .grant-table th:nth-child(6),.grant-table td:nth-child(6){width:6%}
 .grant-table th:nth-child(7),.grant-table td:nth-child(7){width:4%}
 .grant-table th{text-align:left;padding:.75rem 1rem;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--sage-pale);border-bottom:1px solid var(--border)}
-.grant-table td{padding:.9rem 1rem;font-size:.85rem;color:var(--ink);border-bottom:1px solid #f0f5f3;vertical-align:top}
+.grant-table td{padding:.9rem 1rem;font-size:.85rem;color:var(--ink);border-bottom:1px solid #f0f5f3;vertical-align:top;word-wrap:break-word;overflow-wrap:break-word}
 .grant-table tr:last-child td{border-bottom:none}
 .grant-table tr:hover td{background:#f7fcfa}
 
 .grant-name{font-weight:600;color:var(--ink);margin-bottom:2px}
 .grant-funder{font-size:.78rem;color:var(--muted)}
 .category-tag{display:inline-block;padding:.18rem .6rem;border-radius:100px;font-size:.68rem;font-weight:600;background:var(--sage-pale);color:var(--sage);white-space:nowrap}
-.deadline-text{font-size:.85rem;font-weight:500;white-space:nowrap}
+.deadline-text{font-size:.85rem;font-weight:500}
 .deadline-soon{color:var(--amber)}
 .deadline-open{color:var(--ink)}
 .deadline-closed{color:var(--muted);text-decoration:line-through}
 
-.status-badge{display:inline-flex;align-items:center;gap:4px;padding:.22rem .7rem;border-radius:100px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.status-badge{display:inline-flex;align-items:center;gap:4px;padding:.22rem .7rem;border-radius:100px;font-size:.68rem;font-weight:600}
 .status-open{background:var(--green-pale);color:var(--green)}
 .status-soon{background:var(--amber-pale);color:var(--amber)}
 .status-closed{background:#f1f5f3;color:var(--muted)}
